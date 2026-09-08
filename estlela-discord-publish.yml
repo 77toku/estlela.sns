@@ -1,0 +1,74 @@
+name: ESTLELA Discord publisher
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "discord/outbox/*.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: estlela-discord-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Discord secret
+        id: discord-secret
+        shell: bash
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [[ -n "$DISCORD_WEBHOOK_URL" ]]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Add DISCORD_WEBHOOK_URL in repository Actions secrets, then run this workflow again."
+          fi
+
+      - name: Set up Python
+        if: steps.discord-secret.outputs.configured == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Japanese font and Pillow
+        if: steps.discord-secret.outputs.configured == 'true'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes fonts-noto-cjk
+          python -m pip install --disable-pip-version-check "Pillow>=11,<13"
+
+      - name: Publish unsent updates
+        if: steps.discord-secret.outputs.configured == 'true'
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python discord/publish_updates.py
+
+      - name: Save delivery receipts
+        if: steps.discord-secret.outputs.configured == 'true'
+        shell: bash
+        run: |
+          if git diff --quiet -- discord/sent; then
+            echo "No new delivery receipts."
+            exit 0
+          fi
+
+          git config user.name "ESTLELA Update Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add discord/sent
+          git commit -m "Record ESTLELA Discord deliveries"
+          git pull --rebase origin main
+          git push origin HEAD:main
