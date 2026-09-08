@@ -1,0 +1,14 @@
+{
+  "release_id": "connection-test-001",
+  "date": "TEST",
+  "headline": "Discord投稿の接続テスト",
+  "changes": [
+    {
+      "type": "接続テスト",
+      "title": "文章と画像の送信確認",
+      "benefit": "実際のサイト更新のお知らせではありません。"
+    }
+  ],
+  "message": "【接続テスト】エステレラサポートサイトの自動投稿機能を確認しています。この投稿はテストです。",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site"
+}
