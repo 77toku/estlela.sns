@@ -61,7 +61,7 @@ jobs:
         if: steps.discord-secret.outputs.configured == 'true'
         shell: bash
         run: |
-          if git diff --quiet -- discord/sent; then
+          if [[ -z "$(git status --porcelain -- discord/sent)" ]]; then
             echo "No new delivery receipts."
             exit 0
           fi
