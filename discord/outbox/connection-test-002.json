@@ -1,0 +1,15 @@
+{
+  "release_id": "connection-test-002",
+  "date": "TEST",
+  "headline": "自動投稿ルートの接続テスト",
+  "changes": [
+    {
+      "type": "接続テスト",
+      "title": "ChatGPTからの自動登録",
+      "benefit": "GitHub経由で文章と画像が届くことを確認しています。"
+    }
+  ],
+  "message": "【接続テスト】\nChatGPTからGitHubへ登録した投稿データを使い、文章と画像をDiscordへ送信しています。\n\nこの投稿は接続確認用です。実際のサイト更新のお知らせではありません。",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": []
+}
