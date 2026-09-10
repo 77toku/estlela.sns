@@ -1,0 +1,118 @@
+{
+  "changes": [
+    {
+      "benefit": "特徴や使い方を確認できる商品紹介ページを追加しました。",
+      "title": "ANOA美容液LPを追加",
+      "type": "新機能"
+    },
+    {
+      "benefit": "商品LP一覧から紹介ページを選べるようになりました。",
+      "title": "ブースターオイルLPを追加",
+      "type": "新機能"
+    },
+    {
+      "benefit": "活動実績で、LP閲覧と公式への移動回数を分けて確認。",
+      "title": "公式への移動回数を表示",
+      "type": "改善"
+    }
+  ],
+  "date": "2026.09.10",
+  "headline": "商品LPが増えました",
+  "message": "【エステレラ サポート更新】\n商品を紹介するときに使えるLPが増えました✨\n\n・ANOA アルティメットエッセンス\n・ボタニカルブースターオイル\n\n「商品LP共有」から内容を確認してご活用ください。\nhttps://estlela-business-support.honotoku.chatgpt.site/lp-share\n\n活動実績では、LP閲覧と「公式サイトへ進んだ回数」を分けて確認できるようになりました。移動回数は購入数・登録数ではありません。\n\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "release_id": "estlela-v70",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_evidence": {
+    "baseline_commit": "378b4c9cde7475f8518546b67481d173146783f1",
+    "baseline_version": 65,
+    "cutoff_jst": "2026-09-10T07:00:00+09:00",
+    "deployments": [
+      {
+        "env_set_revision": 2,
+        "failure_message": null,
+        "id": "appgdep_6a9f420682b88191b7e54f67d649e360",
+        "project_id": "appgprj_6a9359b53f848191a64cf63115a84f8e",
+        "provider_deployment_id": "site---6a9359b53f848191a64cf63115a84f8e",
+        "screenshot_asset_pointer": "sediment://file_00000000371481f8b255f5ba87b23a5a",
+        "status": "succeeded",
+        "title": "エステレラ ビジネスサポート",
+        "type": "publish",
+        "updated_at": "2026-09-07T23:01:16.909454+00:00",
+        "url": "https://estlela-business-support.honotoku.chatgpt.site",
+        "version": 66,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_7fa6f636959081919b24058790be03c0"
+      },
+      {
+        "env_set_revision": 2,
+        "failure_message": null,
+        "id": "appgdep_6a9feeb5282481919e8c3ff21cea46ff",
+        "project_id": "appgprj_6a9359b53f848191a64cf63115a84f8e",
+        "provider_deployment_id": "site---6a9359b53f848191a64cf63115a84f8e",
+        "screenshot_asset_pointer": "sediment://file_00000000bf0c81f5a5039144a6e5bef9",
+        "status": "succeeded",
+        "title": "エステレラ ビジネスサポート",
+        "type": "publish",
+        "updated_at": "2026-09-08T11:18:00.013357+00:00",
+        "url": "https://estlela-business-support.honotoku.chatgpt.site",
+        "version": 67,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_a753623670108191a1717516680436bc"
+      },
+      {
+        "env_set_revision": 2,
+        "failure_message": null,
+        "id": "appgdep_6aa12e5036a481918cbd00162d010aaa",
+        "project_id": "appgprj_6a9359b53f848191a64cf63115a84f8e",
+        "provider_deployment_id": "site---6a9359b53f848191a64cf63115a84f8e",
+        "screenshot_asset_pointer": "sediment://file_000000006f2c81f8928247552f4ff8d6",
+        "status": "succeeded",
+        "title": "エステレラ ビジネスサポート",
+        "type": "publish",
+        "updated_at": "2026-09-09T10:01:42.049500+00:00",
+        "url": "https://estlela-business-support.honotoku.chatgpt.site",
+        "version": 68,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_daec21c8fc10819199b726dfbe580574"
+      },
+      {
+        "env_set_revision": 2,
+        "failure_message": null,
+        "id": "appgdep_6aa136bf7ee08191b0c4fb5813af05c7",
+        "project_id": "appgprj_6a9359b53f848191a64cf63115a84f8e",
+        "provider_deployment_id": "site---6a9359b53f848191a64cf63115a84f8e",
+        "screenshot_asset_pointer": "sediment://file_00000000b66481f8b60a8a9bd98e82e9",
+        "status": "succeeded",
+        "title": "エステレラ ビジネスサポート",
+        "type": "publish",
+        "updated_at": "2026-09-09T10:37:43.343294+00:00",
+        "url": "https://estlela-business-support.honotoku.chatgpt.site",
+        "version": 69,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_f9e8202dec288191a731b58c945c7b0a"
+      },
+      {
+        "env_set_revision": 2,
+        "failure_message": null,
+        "id": "appgdep_6aa13c1455e881918348a8241841e03a",
+        "project_id": "appgprj_6a9359b53f848191a64cf63115a84f8e",
+        "provider_deployment_id": "site---6a9359b53f848191a64cf63115a84f8e",
+        "screenshot_asset_pointer": "sediment://file_00000000bc7081f8916c17ea3c789552",
+        "status": "succeeded",
+        "title": "エステレラ ビジネスサポート",
+        "type": "publish",
+        "updated_at": "2026-09-09T11:00:27.741621+00:00",
+        "url": "https://estlela-business-support.honotoku.chatgpt.site",
+        "version": 70,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_99caba947a6c8191aeaddc8dadccbff0"
+      }
+    ],
+    "not_included": {
+      "reason": "Saved version has no deployment record; not announced.",
+      "version": 71
+    },
+    "source_commit": "91ece4560441a0476a4773ca746fe0510f13fab4"
+  },
+  "source_versions": [
+    66,
+    67,
+    68,
+    69,
+    70
+  ]
+}
