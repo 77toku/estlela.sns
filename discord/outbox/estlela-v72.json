@@ -1,0 +1,49 @@
+{
+  "release_id": "estlela-v72",
+  "date": "2026.09.12",
+  "headline": "ANOA美容液LPのデザインを更新",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "美容液LPのデザイン刷新",
+      "benefit": "メイン画像を刷新。ボタンも丸みのあるゴールドに統一しました。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nANOA アルティメットエッセンスの紹介ページを更新しました✨\n\nメイン画像を新しくし、ボタンも丸みのあるゴールドのデザインに統一。商品紹介に使うページの印象をそろえました。\n\n更新したページはこちら\nhttps://estlela-business-support.honotoku.chatgpt.site/lp/anoa-ultimate-essence\n\nサポートサイト\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    72
+  ],
+  "source_evidence": {
+    "baseline_version": 70,
+    "baseline_commit": "91ece4560441a0476a4773ca746fe0510f13fab4",
+    "cutoff_jst": "2026-09-12T07:00:00+09:00",
+    "source_commit": "fb34fadfb45ca6a343e0713e8dc3797db01bdc16",
+    "deployment": {
+      "id": "appgdep_6aa34ff7640081919bb9a0832e061af1",
+      "version": 72,
+      "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_03175d17776481918f70b52406eb0039",
+      "status": "succeeded",
+      "type": "publish",
+      "updated_at": "2026-09-11T00:49:52.153316+00:00"
+    },
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/lp/anoa-ultimate-essence",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp/anoa-ultimate-essence#features"
+    ],
+    "verified_changes": [
+      "Hero image src matches /lp-assets/anoa-ultimate-essence/anoa-hero-gold.jpeg; image rendered on production.",
+      "Rounded gold feature link rendered and navigated to #features."
+    ],
+    "deferred_changes": [
+      {
+        "origin_saved_version": 71,
+        "included_in_published_version": 72,
+        "source_commit": "f0a3e2b7e89be9b288c209cf6897472be71316d6",
+        "scope": "LINE flyer sharing and referral tracking",
+        "reason": "Availability and end-to-end operation not verified. Not announced; must be reconsidered separately on future runs even when using v72 as the design baseline."
+      }
+    ],
+    "previous_release_id": "estlela-v70"
+  }
+}
