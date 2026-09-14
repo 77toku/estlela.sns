@@ -1,0 +1,23 @@
+name: Side-job diagnosis checks
+on:
+  push:
+    branches: [main]
+    paths: ['goen-sidejob/**', '.github/workflows/sidejob-check.yml']
+  pull_request:
+    paths: ['goen-sidejob/**', '.github/workflows/sidejob-check.yml']
+permissions:
+  contents: read
+jobs:
+  handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check diagnosis, handoff and clipboard fallback
+        run: node --test goen-sidejob/core.test.mjs
+      - name: Check browser module syntax
+        run: |
+          node --check goen-sidejob/quiz.mjs
+          node --check goen-sidejob/start/start.mjs
