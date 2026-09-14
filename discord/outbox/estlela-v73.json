@@ -1,0 +1,53 @@
+{
+  "release_id": "estlela-v73",
+  "date": "2026.09.15",
+  "headline": "ヘアケア商品LPを追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "ヘアケアLPを追加",
+      "benefit": "2製品の特徴・使い方・成分を1ページで確認できます。"
+    },
+    {
+      "type": "改善",
+      "title": "商品LP一覧から共有",
+      "benefit": "登録先に紐づく紹介リンクを一覧から作成できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nボタニカルアミノミネラルシャンプー＆ボタニカルミネラルコンディショナーの商品LPを追加しました✨\n\n2製品の役割、3つの特徴、使い方・成分、カスタマー登録の案内を1ページで確認できます。\n「商品LP共有」から、登録先に紐づく紹介リンクも作成できます。\n\n商品LP\nhttps://estlela-business-support.honotoku.chatgpt.site/lp/botanical-haircare\n\n商品LP一覧\nhttps://estlela-business-support.honotoku.chatgpt.site/lp-share",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    73
+  ],
+  "source_evidence": {
+    "baseline_version": 72,
+    "baseline_commit": "fb34fadfb45ca6a343e0713e8dc3797db01bdc16",
+    "cutoff_jst": "2026-09-15T07:00:00+09:00",
+    "source_commit": "ae72340f7f978d0c6b0b9087baad66a38ba58df2",
+    "deployment": {
+      "id": "appgdep_6aa83f5652848191aafba9af30682d1f",
+      "version": 73,
+      "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_42cb3bae990481919dabfb641a6359d3",
+      "status": "succeeded",
+      "type": "publish",
+      "updated_at": "2026-09-14T18:40:19.044087+00:00"
+    },
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/lp/botanical-haircare",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share"
+    ],
+    "verified_changes": [
+      "Botanical haircare LP rendered on production with product roles, features, usage, ingredients and customer-registration guidance.",
+      "Product LP share page listed the botanical shampoo and conditioner and generated a referral-bound product link after hydration."
+    ],
+    "deferred_changes": [
+      {
+        "origin_saved_version": 71,
+        "included_in_published_version": 73,
+        "scope": "LINE flyer sharing and referral tracking",
+        "reason": "The production LINE flyer page could not verify referral information end to end. Not announced."
+      }
+    ],
+    "previous_release_id": "estlela-v72"
+  }
+}
