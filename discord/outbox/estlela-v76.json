@@ -1,0 +1,59 @@
+{
+  "release_id": "estlela-v76",
+  "date": "2026.09.17",
+  "headline": "ANOA新LPと活動実績を改善",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "ANOA新デザインLP",
+      "benefit": "黒×ゴールドのLPを追加。従来版もそのまま利用できます。"
+    },
+    {
+      "type": "改善",
+      "title": "活動実績を2指標化",
+      "benefit": "LP閲覧と公式クリックを期間・商品別に比較できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n商品紹介と活動実績を改善しました✨\n\n・ANOA ミルフィアバスエッセンスに、黒×ゴールドの新しいLPを追加。従来版もそのまま使えます。\n・共有用の活動実績で、商品LPの閲覧回数と公式サイトへのクリック回数を、期間別・商品別に分けて確認できます。\n\n紹介内容の選び分けと、反応の比較がしやすくなりました。\n\n商品LP一覧\nhttps://estlela-business-support.honotoku.chatgpt.site/lp-share\n\nサポートサイト\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    74,
+    75,
+    76
+  ],
+  "source_evidence": {
+    "baseline_version": 73,
+    "baseline_commit": "ae72340f7f978d0c6b0b9087baad66a38ba58df2",
+    "cutoff_jst": "2026-09-17T07:00:00+09:00",
+    "source_commits": {
+      "74": "27ffc9588469febfb392d555f647b8986fce7142",
+      "75": "1d22d3950191b5dc68861f36d83696f7eded397c",
+      "76": "81c74e682edda04debecfe0018884fa160041254"
+    },
+    "latest_deployment": {
+      "id": "appgdep_6aa9f283c6d48191b92928668171f3d5",
+      "version": 76,
+      "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_fe693f2704e08191b9a458b0b851c31e",
+      "status": "succeeded",
+      "type": "publish",
+      "updated_at": "2026-09-16T01:37:03.731628+00:00"
+    },
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+      "https://estlela-business-support.honotoku.chatgpt.site/go/anoa-night?id=479436&preview=1&coupon=N6HSAHH2"
+    ],
+    "verified_changes": [
+      "Production product list includes the separate ANOA black-and-gold LP while preserving the original ANOA LP.",
+      "Production activity report separates product LP views and official-site clicks, with period tabs and product-level rows."
+    ],
+    "deferred_changes": [
+      {
+        "origin_saved_version": 71,
+        "included_in_published_version": 76,
+        "scope": "LINE flyer sharing and referral tracking",
+        "reason": "The production LINE flyer flow remains unverified end to end. Not announced."
+      }
+    ],
+    "previous_release_id": "estlela-v73"
+  }
+}
