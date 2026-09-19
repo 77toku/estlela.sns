@@ -1,0 +1,51 @@
+{
+  "release_id": "estlela-v77",
+  "date": "2026.09.20",
+  "headline": "ラクティーク商品LPを追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "ラクティークLP追加",
+      "benefit": "商品一覧から紹介用リンクを作成・共有できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n「乳酸菌生産ラクティーク」の商品LPを追加しました✨\n\n商品LP一覧から内容を確認し、紹介者情報付きの共有リンクを作成できます。特徴・原材料・お召し上がり方を、ひとつのページで案内しやすくなりました。\n\n商品LP一覧\nhttps://estlela-business-support.honotoku.chatgpt.site/lp-share\n\nサポートサイト\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    77
+  ],
+  "source_evidence": {
+    "baseline_version": 76,
+    "baseline_commit": "81c74e682edda04debecfe0018884fa160041254",
+    "cutoff_jst": "2026-09-20T07:00:00+09:00",
+    "source_commits": {
+      "77": "1bd3eb86bd4360360edd998968a7c85aaba81621"
+    },
+    "latest_deployment": {
+      "id": "appgdep_6aaed3494eec81919d0200724759047b",
+      "version": 77,
+      "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_e1dc796d855c8191b887623e7041fde5",
+      "status": "succeeded",
+      "type": "publish",
+      "updated_at": "2026-09-19T18:25:08.557616+00:00"
+    },
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+      "https://estlela-business-support.honotoku.chatgpt.site/go/lactique?id=479436&coupon=N6HSAHH2",
+      "https://estlela-lactique.honotoku.chatgpt.site/?id=479436&coupon=N6HSAHH2"
+    ],
+    "verified_changes": [
+      "Production product LP catalog includes 乳酸菌生産ラクティーク.",
+      "Tracked referral URL redirects to the live Lactique LP while preserving affiliate and coupon parameters."
+    ],
+    "deferred_changes": [
+      {
+        "origin_saved_version": 71,
+        "included_in_published_version": 77,
+        "scope": "LINE flyer sharing and referral tracking",
+        "reason": "The production LINE flyer flow remains unverified end to end. Not announced."
+      }
+    ],
+    "previous_release_id": "estlela-v76"
+  }
+}
