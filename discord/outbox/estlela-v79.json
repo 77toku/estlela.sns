@@ -1,0 +1,62 @@
+{
+  "release_id": "estlela-v79",
+  "date": "2026.09.21",
+  "headline": "ラクティーク紹介リンクを改善",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "紹介リンクを改善",
+      "benefit": "紹介者IDを確認し、正しい専用LPへ案内します。"
+    },
+    {
+      "type": "改善",
+      "title": "ブランド案内を整理",
+      "benefit": "案内を絞り、ブランド情報を見やすくしました。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nラクティークの紹介リンクと、ブランド案内ページを改善しました✨\n\n・紹介者IDを確認して専用LPへ案内。不完全なリンクはエラー表示し、誤った紹介先への移動を防ぎます。\n・ブランドページの案内を整理し、「整える」という考え方や製品カテゴリーを見やすくしました。\n\n商品LP一覧\nhttps://estlela-business-support.honotoku.chatgpt.site/lp-share\n\nブランドを知る\nhttps://estlela-business-support.honotoku.chatgpt.site/brand",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    78,
+    79
+  ],
+  "source_evidence": {
+    "baseline_version": 77,
+    "baseline_commit": "1bd3eb86bd4360360edd998968a7c85aaba81621",
+    "cutoff_jst": "2026-09-21T07:00:00+09:00",
+    "source_commits": {
+      "78": "d5b7d106cc4ca57b9a7242a3dc156c4056fa81e4",
+      "79": "324c11f9e2328a1dee398af847a577a71ccf32a0"
+    },
+    "deployments": [
+      {
+        "id": "appgdep_6aaf227680288191a0e8f7825357b60c",
+        "version": 78,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_e1b7beec56e48191af400ee9704849bd",
+        "status": "succeeded",
+        "type": "publish",
+        "updated_at": "2026-09-20T00:02:59.241751+00:00"
+      },
+      {
+        "id": "appgdep_6aaf5fbd37988191be7e2341aabb2ead",
+        "version": 79,
+        "version_id": "appgprj_6a9359b53f848191a64cf63115a84f8e~appgver_276afefc63bc819187be068a6b51d136",
+        "status": "succeeded",
+        "type": "publish",
+        "updated_at": "2026-09-20T04:24:26.750754+00:00"
+      }
+    ],
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/brand",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+      "https://estlela-business-support.honotoku.chatgpt.site/go/lactique?id=479436&coupon=N6HSAHH2",
+      "https://estlela-business-support.honotoku.chatgpt.site/api/lactique-referral?id=479436"
+    ],
+    "verified_changes": [
+      "The production brand page no longer includes the care finder and neutral comparison section.",
+      "The production Lactique route verifies the referral ID, preserves the supplied referral parameters, and rejects a missing dedicated link.",
+      "The production Lactique referral API returns the verified affiliate ID without claiming coupon eligibility."
+    ],
+    "previous_release_id": "estlela-v77"
+  }
+}
