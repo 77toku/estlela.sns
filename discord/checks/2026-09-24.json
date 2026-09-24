@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-09-24T12:32:25.957133+09:00",
+  "cutoff_jst": "2026-09-24T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "checked_by": "Manual maintenance audit, not a reconstructed morning task result",
+    "latest_saved_version": 79,
+    "latest_publish_deployment_id": "appgdep_6aaf5fbd37988191be7e2341aabb2ead",
+    "deployment_status": "succeeded",
+    "deployment_updated_at": "2026-09-20T04:24:26.750754+00:00",
+    "baseline_release": "estlela-v79",
+    "baseline_receipt_commit": "d84c1262100c54afb6d264dc39627a1df766ebd1",
+    "pending_outbox_count": 0
+  }
+}

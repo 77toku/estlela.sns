@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 import tempfile
 import time
 import urllib.error
@@ -22,8 +23,9 @@ from render_update import render_update, validate_payload
 ROOT = Path(__file__).resolve().parent
 OUTBOX = ROOT / "outbox"
 SENT = ROOT / "sent"
+ATTEMPTS = ROOT / "attempts"
 MAX_FILE_BYTES = 20 * 1024 * 1024
-RETRYABLE_STATUS = {429, 500, 502, 503, 504}
+RETRYABLE_STATUS = {429}
 
 
 def canonical_hash(payload: dict[str, Any]) -> str:
@@ -141,18 +143,12 @@ def send_to_discord(webhook_url: str, payload: dict[str, Any], image_path: Path)
         except urllib.error.HTTPError as error:
             last_error = error
             if error.code not in RETRYABLE_STATUS or attempt == 4:
-                response_text = error.read().decode("utf-8", errors="replace")[:600]
-                raise RuntimeError(f"Discord webhook failed with HTTP {error.code}: {response_text}") from error
+                raise RuntimeError(f"Discord webhook failed with HTTP {error.code}; inspect delivery before retrying") from None
             delay = retry_delay(error, attempt)
             print(f"Discord returned HTTP {error.code}; retrying in {delay:.1f}s")
             time.sleep(delay)
         except (urllib.error.URLError, TimeoutError) as error:
-            last_error = error
-            if attempt == 4:
-                raise RuntimeError("Discord webhook could not be reached after retries") from error
-            delay = float(min(2**attempt, 30))
-            print(f"Temporary network failure; retrying in {delay:.1f}s")
-            time.sleep(delay)
+            raise RuntimeError("Discord delivery is uncertain; inspect the channel before retrying") from None
 
     raise RuntimeError("Discord webhook failed") from last_error
 
@@ -193,33 +189,97 @@ def render_only(payload_path: Path, output_path: Path) -> None:
     print(f"Rendered {output_path}")
 
 
+def checkpoint(path: Path, message: str) -> None:
+    """Persist before HTTP POST; failure must prevent sending."""
+    if os.environ.get("ESTLELA_DURABLE_DELIVERY") != "1":
+        raise RuntimeError("Live publishing requires ESTLELA_DURABLE_DELIVERY=1 and a writable main checkout")
+    cwd = ROOT.parent
+    subprocess.run(["git", "add", str(path.relative_to(cwd))], cwd=cwd, check=True)
+    subprocess.run(["git", "commit", "-m", message], cwd=cwd, check=True)
+    for attempt in range(3):
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], cwd=cwd, check=True)
+        result = subprocess.run(["git", "push", "origin", "HEAD:main"], cwd=cwd)
+        if result.returncode == 0:
+            return
+    raise RuntimeError("Could not persist delivery state; automatic sending stopped")
+
+
+def semantic_hash(payload: dict[str, Any]) -> str:
+    return canonical_hash({k: payload[k] for k in ("headline", "changes", "message", "site_url")})
+
+
+def check_queue() -> list[dict[str, Any]]:
+    """Preflight the entire batch before sending any messages."""
+    for marker in SENT.glob("*.json"):
+        if not (OUTBOX / marker.name).exists():
+            raise ValueError(f"Missing historical outbox for receipt: {marker.name}")
+    pending = []
+    versions: dict[int, str] = {}
+    contents: dict[str, str] = {}
+    for path in sorted(OUTBOX.glob("*.json")):
+        payload = load_payload(path)
+        rid = safe_release_id(payload)
+        if path.stem != rid:
+            raise ValueError("Outbox filename must equal release_id")
+        source_versions = payload.get("source_versions", [])
+        if not isinstance(source_versions, list) or any(type(v) is not int for v in source_versions):
+            raise ValueError(f"Invalid source_versions: {rid}")
+        if not source_versions and not rid.startswith("connection-test-"):
+            raise ValueError(f"Missing source_versions: {rid}")
+        for version in source_versions:
+            if version in versions and versions[version] != rid:
+                raise ValueError(f"Overlapping source version {version}: {rid}")
+            versions[version] = rid
+        digest = semantic_hash(payload)
+        # Existing connection tests can intentionally contain the same text.
+        if not rid.startswith("connection-test-"):
+            if digest in contents:
+                raise ValueError(f"Duplicate announcement content: {rid}")
+            contents[digest] = rid
+        marker = SENT / f"{rid}.json"
+        if marker.exists():
+            receipt = json.loads(marker.read_text())
+            if (receipt.get("release_id") != rid or
+                    receipt.get("content_hash") != canonical_hash(payload) or
+                    not receipt.get("discord_message_id")):
+                raise ValueError(f"Receipt mismatch: {rid}")
+        elif (ATTEMPTS / f"{rid}.json").exists():
+            raise RuntimeError(f"Unresolved delivery attempt: {rid}; reconcile before retry")
+        else:
+            pending.append(payload)
+    return pending
+
+
 def publish_all() -> int:
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
     if not webhook_url:
-        print("::warning::DISCORD_WEBHOOK_URL is not configured; no messages were sent.")
-        return 0
+        raise RuntimeError("DISCORD_WEBHOOK_URL is not configured")
     if not webhook_url.startswith("https://discord.com/api/webhooks/"):
         raise ValueError("DISCORD_WEBHOOK_URL is not a Discord webhook URL")
 
     OUTBOX.mkdir(parents=True, exist_ok=True)
     SENT.mkdir(parents=True, exist_ok=True)
-    payload_paths = sorted(OUTBOX.glob("*.json"))
+    pending = check_queue()
     posted = 0
 
-    for payload_path in payload_paths:
-        payload = load_payload(payload_path)
+    for payload in pending:
         release_id = safe_release_id(payload)
-        marker = SENT / f"{release_id}.json"
-        if marker.exists():
-            print(f"Skipping already-sent release {release_id}")
-            continue
-
         with tempfile.TemporaryDirectory(prefix="estlela-discord-") as temp_dir:
             image_path = Path(temp_dir) / f"{release_id}.png"
             render_update(payload, image_path)
+            ATTEMPTS.mkdir(parents=True, exist_ok=True)
+            intent = ATTEMPTS / f"{release_id}.json"
+            intent.write_text(json.dumps({
+                "release_id": release_id,
+                "content_hash": canonical_hash(payload),
+                "started_at": datetime.now(timezone.utc).isoformat(),
+                "run_id": os.environ.get("GITHUB_RUN_ID", "manual"),
+            }, indent=2) + "\n")
+            checkpoint(intent, f"Reserve ESTLELA Discord delivery {release_id}")
             message_id = send_to_discord(webhook_url, payload, image_path)
             marker = write_marker(payload, message_id)
-            print(f"Posted {release_id}; marker: {marker.relative_to(ROOT.parent)}")
+            checkpoint(marker, "Record ESTLELA Discord deliveries")
+            print(f"Posted {release_id}; marker: {marker.name}")
             posted += 1
 
     if posted == 0:
@@ -229,10 +289,14 @@ def publish_all() -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--render-only", type=Path, help="Validate and render one payload without posting")
     parser.add_argument("--output", type=Path, default=Path("/tmp/estlela-update.png"))
     args = parser.parse_args()
 
+    if args.check_only:
+        print(f"Validated queue: {len(check_queue())} pending")
+        return 0
     if args.render_only:
         render_only(args.render_only, args.output)
         return 0

@@ -2,14 +2,20 @@ name: ESTLELA Discord publisher
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
     paths:
-      - "discord/outbox/*.json"
+      - 'discord/outbox/*.json'
+      - 'discord/checks/*.json'
+      - 'discord/*.py'
+      - '.github/workflows/estlela-discord-publish.yml'
+  schedule:
+    - cron: '0 22 * * *' # 07:00 JST: recover queued deliveries
+    - cron: '45 22 * * *' # 07:45 JST: generator heartbeat + second recovery
   workflow_dispatch:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: estlela-discord-publisher
@@ -17,58 +23,66 @@ concurrency:
 
 jobs:
   publish:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
+          ref: main # Read current receipts after waiting for concurrency lock
           fetch-depth: 0
-
-      - name: Check Discord secret
-        id: discord-secret
-        shell: bash
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-        run: |
-          if [[ -n "$DISCORD_WEBHOOK_URL" ]]; then
-            echo "configured=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "configured=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Add DISCORD_WEBHOOK_URL in repository Actions secrets, then run this workflow again."
-          fi
-
-      - name: Set up Python
-        if: steps.discord-secret.outputs.configured == 'true'
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-
-      - name: Install Japanese font and Pillow
-        if: steps.discord-secret.outputs.configured == 'true'
-        shell: bash
+          python-version: '3.12'
+      - name: Configure receipt commits
+        run: |
+          git config user.name 'ESTLELA Update Bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+      - name: Install renderer
         run: |
           sudo apt-get update
           sudo apt-get install --yes fonts-noto-cjk
-          python -m pip install --disable-pip-version-check "Pillow>=11,<13"
-
+          python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Test publisher and validate queue
+        run: |
+          python -m unittest discover -s discord -p 'test_*.py'
+          python discord/publish_updates.py --check-only
       - name: Publish unsent updates
-        if: steps.discord-secret.outputs.configured == 'true'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ESTLELA_DURABLE_DELIVERY: '1'
         run: python discord/publish_updates.py
-
-      - name: Save delivery receipts
-        if: steps.discord-secret.outputs.configured == 'true'
-        shell: bash
+      - name: Preserve local delivery evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: delivery-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            discord/sent/
+            discord/attempts/
+          retention-days: 30
+      - name: Check morning generator result
+        run: python discord/check_health.py
+      - name: Record health result
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
         run: |
-          if [[ -z "$(git status --porcelain -- discord/sent)" ]]; then
-            echo "No new delivery receipts."
-            exit 0
-          fi
-
-          git config user.name "ESTLELA Update Bot"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add discord/sent
-          git commit -m "Record ESTLELA Discord deliveries"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          echo "## ESTLELA daily delivery" >> "$GITHUB_STEP_SUMMARY"
+          echo "Result: $JOB_STATUS. See generator records in discord/checks and receipts in discord/sent." >> "$GITHUB_STEP_SUMMARY"
+      - name: Open or update failure alert
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '[ESTLELA] Daily update needs attention';
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              ...context.repo, state: 'open', creator: 'github-actions[bot]', per_page: 100
+            });
+            const existing = issues.find(i => !i.pull_request && i.title === title);
+            const body = `ESTLELAの確認または配信が失敗しました。\n\n実行ログ: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}\n\nログとdiscord/checks、discord/attempts、discord/sentを確認してください。送信結果不明のattemptはDiscord実物との照合前に削除・再送しないでください。`;
+            if (existing) {
+              await github.rest.issues.update({...context.repo, issue_number: existing.number, body});
+            } else {
+              await github.rest.issues.create({...context.repo, title, body});
+            }
