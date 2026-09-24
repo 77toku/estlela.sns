@@ -1,0 +1,23 @@
+{
+  "checked_at": "2026-09-25T07:05:50+09:00",
+  "cutoff_jst": "2026-09-25T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "latest_saved_version": 79,
+    "latest_publish_deployment_id": "appgdep_6aaf5fbd37988191be7e2341aabb2ead",
+    "deployment_status": "succeeded",
+    "deployment_updated_at": "2026-09-20T04:24:26.750754+00:00",
+    "baseline_release": "estlela-v79",
+    "baseline_source_versions": [78, 79],
+    "pending_outbox_count": 0,
+    "unresolved_attempt_count": 0,
+    "production_probe": {
+      "url": "https://estlela-business-support.honotoku.chatgpt.site/brand",
+      "http_status": 200
+    },
+    "previous_day_check": "discord/checks/2026-09-24.json: no_update",
+    "previous_day_publisher": "No scheduled ESTLELA publisher run was found for 2026-09-24 JST; the latest run was a successful maintenance push at 2026-09-24T03:33:42Z.",
+    "open_failure_issue_count": 0
+  }
+}
