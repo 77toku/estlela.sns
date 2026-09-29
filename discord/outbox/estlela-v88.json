@@ -1,0 +1,119 @@
+{
+  "release_id": "estlela-v88",
+  "date": "2026.09.30",
+  "headline": "サポート画面刷新＆動画送信追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "動画を送る",
+      "benefit": "専用URLを作成・管理し、視聴開始から24時間共有できます。"
+    },
+    {
+      "type": "改善",
+      "title": "全体デザイン刷新",
+      "benefit": "パステル×パール調で、目的のページを選びやすくしました。"
+    },
+    {
+      "type": "不具合修正",
+      "title": "リンク共有表示を修正",
+      "benefit": "コピー・共有の完了状態を正しく確認できるようにしました。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nサポートサイトをパステル×パール調のデザインに刷新しました✨\n\n・ホームに「動画を送る」を追加。専用URLを作成・管理し、視聴開始から24時間限定で共有できます。\n・ページ全体の見た目を統一し、目的のサポートを選びやすくしました。\n・紹介リンクのコピー・共有時の完了表示を修正しました。\n\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88
+  ],
+  "source_evidence": {
+    "baseline_version": 79,
+    "baseline_commit": "324c11f9e2328a1dee398af847a577a71ccf32a0",
+    "cutoff_jst": "2026-09-30T07:00:00+09:00",
+    "source_commits": {
+      "80": "77d24e83e5c837ccefc532277ee641d9dbc8856b",
+      "81": "82131244514e33129d353c67da96799effba6154",
+      "82": "8719f2e3057d208fa09f2e8e9de10d7ff9fd9808",
+      "83": "fc3aced24e8c8fdd777f20c0dfcf429281466e58",
+      "84": "79465dc732a23cf82e69e51c90f7f0f2bd516df0",
+      "85": "b07ea03c744025ac0244bb08a9077d8f6dbbb1ff",
+      "86": "6f97d8d0a8dca220c7f4701d92773a5de71d2187",
+      "87": "088661c8b215e21e3949ea6bb16098028631c96c",
+      "88": "6f915d2c77225b9e4153bdd5fa5efc74568abbac"
+    },
+    "deployments": [
+      {
+        "id": "appgdep_6abb0e1197448191b029fc7d2dee41d9",
+        "version": 80,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T01:03:14.095967+00:00"
+      },
+      {
+        "id": "appgdep_6abb915353348191b7731602a0a2e3c8",
+        "version": 81,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T10:23:10.143336+00:00"
+      },
+      {
+        "id": "appgdep_6abb91f17110819189d6fbaf48b8c761",
+        "version": 82,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T10:25:49.039980+00:00"
+      },
+      {
+        "id": "appgdep_6abb933f5d1c81918a5d227cd8f51485",
+        "version": 83,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T10:31:24.534381+00:00"
+      },
+      {
+        "id": "appgdep_6abb9457908c81919ad2485c635275a7",
+        "version": 84,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T10:36:07.926355+00:00"
+      },
+      {
+        "id": "appgdep_6abb9549d6148191aebb3bcda5736e6b",
+        "version": 85,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T10:40:04.508349+00:00"
+      },
+      {
+        "id": "appgdep_6abbc488ef888191918704c59672ed18",
+        "version": 86,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T14:01:57.638241+00:00"
+      },
+      {
+        "id": "appgdep_6abc077c333c8191a9ebe90a3a57f33a",
+        "version": 87,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T18:47:18.517549+00:00"
+      },
+      {
+        "id": "appgdep_6abc0cb4923481918847a5e1f4b3ec2a",
+        "version": 88,
+        "status": "succeeded",
+        "updated_at": "2026-09-29T19:09:33.742244+00:00"
+      }
+    ],
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+      "https://video-window.honotoku.chatgpt.site/admin"
+    ],
+    "verified_changes": [
+      "The production home page exposes a sixth '動画を送る' card linking to the Video Room admin.",
+      "The Video Room production page supports dedicated URL creation and states a 24-hour window from first viewing.",
+      "The production site uses a unified pastel-and-pearl visual design across the home and internal pages.",
+      "The production LP share page confirms successful copying with '紹介リンクをコピーしました'."
+    ],
+    "previous_release_id": "estlela-v79"
+  }
+}
