@@ -1,0 +1,66 @@
+{
+  "checked_at": "2026-09-30T07:07:48+09:00",
+  "cutoff_jst": "2026-09-30T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v88"
+  ],
+  "evidence": {
+    "latest_saved_version": 88,
+    "latest_publish_deployment_id": "appgdep_6abc0cb4923481918847a5e1f4b3ec2a",
+    "deployment_status": "succeeded",
+    "deployment_updated_at": "2026-09-29T19:09:33.742244+00:00",
+    "baseline_release": "estlela-v79",
+    "baseline_source_versions": [
+      78,
+      79
+    ],
+    "confirmed_source_versions": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "outbox_commit": "63a500b894abb2f9481d7130529f936d689bb8ee",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "production_probes": [
+      {
+        "url": "https://estlela-business-support.honotoku.chatgpt.site/",
+        "http_status": 200,
+        "verified": "video entry and refreshed home design"
+      },
+      {
+        "url": "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+        "http_status": 200,
+        "verified": "copy success state"
+      },
+      {
+        "url": "https://video-window.honotoku.chatgpt.site/admin",
+        "http_status": 200,
+        "verified": "dedicated URL creation and 24-hour viewing window"
+      }
+    ],
+    "previous_day_check": "discord/checks/2026-09-29.json: no_update",
+    "previous_day_publisher": [
+      {
+        "run_id": 36507793260,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-09-29T01:25:04Z"
+      },
+      {
+        "run_id": 36512068027,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-09-29T02:19:39Z"
+      }
+    ],
+    "open_failure_issue_count": 0
+  }
+}
