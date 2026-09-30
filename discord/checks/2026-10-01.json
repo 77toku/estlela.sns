@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-01T07:05:14+09:00",
+  "cutoff_jst": "2026-10-01T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "latest_saved_version": 88,
+    "latest_publish_deployment_id": "appgdep_6abc0cb4923481918847a5e1f4b3ec2a",
+    "deployment_status": "succeeded",
+    "deployment_updated_at": "2026-09-29T19:09:33.742244+00:00",
+    "baseline_release": "estlela-v88",
+    "baseline_source_versions": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "pending_outbox_count": 0,
+    "unresolved_attempt_count": 0,
+    "production_probes": [
+      {
+        "url": "https://estlela-business-support.honotoku.chatgpt.site/",
+        "http_status": 200
+      },
+      {
+        "url": "https://estlela-business-support.honotoku.chatgpt.site/brand",
+        "http_status": 200
+      },
+      {
+        "url": "https://estlela-business-support.honotoku.chatgpt.site/lp-share",
+        "http_status": 200
+      }
+    ],
+    "excluded_related_change": "The linked Video Room was changed after the previous cutoff, but the target ESTLELA support Sites project remained at published version 88; no new support-site release was available to announce.",
+    "previous_day_check": "discord/checks/2026-09-30.json: delivered estlela-v88",
+    "previous_day_publisher": [
+      {
+        "run_id": 36652909336,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-09-30T00:59:00Z"
+      },
+      {
+        "run_id": 36655982270,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-09-30T01:37:14Z"
+      }
+    ],
+    "open_failure_issue_count": 0
+  }
+}
