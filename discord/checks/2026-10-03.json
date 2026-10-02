@@ -1,0 +1,69 @@
+{
+  "checked_at": "2026-10-03T07:04:54+09:00",
+  "cutoff_jst": "2026-10-03T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v95"
+  ],
+  "evidence": {
+    "baseline_release": "estlela-v88",
+    "baseline_source_versions": [
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "confirmed_public_versions": [
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "latest_publish_deployment_id": "appgdep_6abfc235af788191bb18283741e2b747",
+    "latest_deployment_status": "succeeded",
+    "latest_deployment_updated_at": "2026-10-02T14:40:51.950470+00:00",
+    "release_id": "estlela-v95",
+    "outbox_path": "discord/outbox/estlela-v95.json",
+    "outbox_commit": "4a65340293468a188cc9ae1c6781853a6b6adcee",
+    "verified_changes": [
+      "The production LP share page lists the Collagen On Omega limited campaign for 2026-10-10 21:00 through 2026-10-18 23:59 JST, with 30% off the two-bag set, 25% off the Fullbozyme set, and coupon combination.",
+      "The production home page contains nine menu cards in a 3-by-3 layout, including direct registration entries for ESTLELA, Wealmax, and the life-skills salon.",
+      "The production Wealmax registration page lists eight learning topics including Start guide, 48 training, communication, video editing, Instagram, design, and sales."
+    ],
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share?ref=282500",
+      "https://estlela-business-support.honotoku.chatgpt.site/start/wealmax",
+      "https://estlela-omega-campaign.honotoku.chatgpt.site/"
+    ],
+    "excluded_saved_versions": [
+      89,
+      90
+    ],
+    "exclusion_reason": "No independently verifiable surviving user-facing change was attributable to v89-v90; the confirmed cumulative production changes begin at v91 and are present in v95.",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-02.json: error",
+    "previous_day_publisher": [
+      {
+        "run_id": 36950052580,
+        "event": "schedule",
+        "conclusion": "failure",
+        "created_at": "2026-10-02T01:15:24Z"
+      },
+      {
+        "run_id": 36952753716,
+        "event": "schedule",
+        "conclusion": "failure",
+        "created_at": "2026-10-02T01:49:23Z"
+      }
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1"
+  }
+}
