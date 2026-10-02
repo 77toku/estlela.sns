@@ -1,0 +1,54 @@
+{
+  "release_id": "estlela-v95",
+  "date": "2026.10.03",
+  "headline": "限定キャンペーン＆登録導線を追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "期間限定キャンペーン",
+      "benefit": "対象セットの割引・期間・クーポン併用を確認できます。"
+    },
+    {
+      "type": "改善",
+      "title": "登録入口を9枠化",
+      "benefit": "3つの登録先へトップから迷わず進めます。"
+    },
+    {
+      "type": "改善",
+      "title": "Wealmax案内充実",
+      "benefit": "学べる8項目を事前に確認しやすくしました。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n期間限定キャンペーンと登録サポートを追加しました✨\n\n・コラーゲンオンオメガのキャンペーンLPを商品一覧へ追加。10/10 21:00〜10/18 23:59、2袋30%OFF／フルボザイムセット25%OFF、クーポン併用可能です。\n・トップを3×3の9枠にし、エステレラ・Wealmax・人生スキル向上サロンの登録入口を追加。\n・Wealmaxで学べる8項目を案内ページに掲載しました。\n\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    91,
+    92,
+    93,
+    94,
+    95
+  ],
+  "source_evidence": {
+    "baseline_version": 88,
+    "baseline_release_id": "estlela-v88",
+    "cutoff_jst": "2026-10-03T07:00:00+09:00",
+    "source_commits": {
+      "91": "90024cdbbe6bf2136f48263a2b4f122c35bb56ad",
+      "92": "24e7d19e729ccd7a3dcd3e58e9666b174e0cc8e6",
+      "93": "08a8e87bee44e41db2271d323551a5d12e6ca3ca",
+      "94": "021f07dab379aaaa4a1305f5ff551f44d60d6cc3",
+      "95": "ea40015ca060c25266b289f96a754ff237cd48ec"
+    },
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/",
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share?ref=282500",
+      "https://estlela-business-support.honotoku.chatgpt.site/start/wealmax",
+      "https://estlela-omega-campaign.honotoku.chatgpt.site/"
+    ],
+    "excluded_versions": [
+      89,
+      90
+    ],
+    "exclusion_reason": "v89-v90 had no independently verifiable surviving user-facing change; the confirmed cumulative production changes begin at v91 and are present in v95."
+  }
+}
