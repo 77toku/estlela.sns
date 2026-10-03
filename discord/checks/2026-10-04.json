@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-04T07:08:54+09:00",
+  "cutoff_jst": "2026-10-04T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v103"
+  ],
+  "evidence": {
+    "baseline_release": "estlela-v95",
+    "baseline_source_versions": [
+      91,
+      92,
+      93,
+      94,
+      95
+    ],
+    "confirmed_public_versions": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103
+    ],
+    "latest_publish_deployment_id": "appgdep_6ac06717f9b8819183f621f23bbe1275",
+    "latest_deployment_status": "succeeded",
+    "latest_deployment_updated_at": "2026-10-03T02:24:16.552347+00:00",
+    "release_id": "estlela-v103",
+    "outbox_path": "discord/outbox/estlela-v103.json",
+    "outbox_commit": "305fd70cb073cbbf87f0d6193c0fd0794f70f5b1",
+    "verified_changes": [
+      "The production LP share page lists ANOA Ultima Treatment and provides a configured introduction link to the public product LP.",
+      "The production Wealmax guide includes ref-aware URL copying, a confirmation-message copy action, and instructions to confirm the direct-up and introducer fields.",
+      "The production skill-salon flow is organized into three steps; registration navigation and completion guidance lead back to the home screen; the product menu uses a three-column responsive grid."
+    ],
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/lp-share?ref=282500",
+      "https://estlela-business-support.honotoku.chatgpt.site/start/wealmax?ref=282500",
+      "https://estlela-business-support.honotoku.chatgpt.site/start/skill-salon?ref=282500",
+      "https://estlela-ultima-treatment.honotoku.chatgpt.site/"
+    ],
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-03.json: delivered",
+    "previous_day_publisher": [
+      {
+        "run_id": 37083917036,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-10-03T00:53:18Z"
+      },
+      {
+        "run_id": 37086223326,
+        "event": "schedule",
+        "conclusion": "success",
+        "created_at": "2026-10-03T01:28:27Z"
+      }
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1"
+  }
+}
