@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-05T06:59:18+09:00",
+  "cutoff_jst": "2026-10-05T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v104"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v103",
+    "baseline_source_versions": [
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103
+    ],
+    "confirmed_public_versions": [
+      104
+    ],
+    "latest_publish": {
+      "deployment_id": "appgdep_6ac2c0faf5f8819194fd891ac296b44c",
+      "status": "succeeded",
+      "published_at": "2026-10-05T06:12:21.522859+09:00",
+      "source_commit": "fabe93e5b1236da74df5c5ccdb6d6a258cbbeecd"
+    },
+    "verified_change": "他社比較ページの共有ボタンを一本化。共有表示ではホーム導線を非表示、通常表示ではホームへ戻る導線を維持。",
+    "verified_urls": [
+      "https://estlela-business-support.honotoku.chatgpt.site/compare",
+      "https://estlela-business-support.honotoku.chatgpt.site/compare?standalone=1&ref=479436"
+    ],
+    "outbox_path": "discord/outbox/estlela-v104.json",
+    "outbox_commit": "47e2aaa40ded149cf37759b098f5da0d12f1d62e",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-04.json: delivered",
+    "previous_day_publisher_runs": [
+      "37164579891: success",
+      "37169686297: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1"
+  }
+}
