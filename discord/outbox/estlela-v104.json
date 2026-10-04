@@ -1,0 +1,17 @@
+{
+  "release_id": "estlela-v104",
+  "date": "2026.10.05",
+  "headline": "比較ページの単独共有を改善",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "比較ページ単独共有",
+      "benefit": "共有先ではホームを隠し、説明に集中してもらえます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n他社比較ページの共有方法を改善しました✨\n\n・共有ボタンを「この説明ページだけを共有する」に一本化\n・共有されたページではホームへのボタンを非表示\n・通常のページではホームへ戻る導線を維持\n\n比較の考え方や使い方だけを、迷わず案内できます。\n\nhttps://estlela-business-support.honotoku.chatgpt.site/compare",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    104
+  ]
+}
