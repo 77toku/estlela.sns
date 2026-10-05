@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-06T07:04:20+09:00",
+  "cutoff_jst": "2026-10-06T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v105"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v104",
+    "baseline_source_versions": [
+      104
+    ],
+    "confirmed_public_versions": [
+      105
+    ],
+    "latest_publish": {
+      "deployment_id": "appgdep_6ac2f0dfb60c819193a0e6175e9b6353",
+      "status": "succeeded",
+      "published_at": "2026-10-05T09:36:44.721928+09:00",
+      "source_commit": "c85ae393a64608c68da49354f5a5728efcabb767"
+    },
+    "verified_change": "紹介者別の活動実績ページ上部に、ウェルマックスコンテンツ・人生スキル向上サロン・エステレラの3入口を追加。各リンクは別タブで開く。",
+    "verification": {
+      "live_route_pattern": "/affiliate-activity?ref=<紹介ID>&token=<個別トークン>",
+      "live_bundle": "assets/activity-client-C0_EOaNW.js",
+      "destination_urls": [
+        "https://wealmax.jp/index",
+        "https://jinseiskill.com/",
+        "https://estlela.jp/"
+      ],
+      "note": "公開済みv105の配信中構成ファイルと編集完了履歴を照合。個別トークンは取得・記録していない。"
+    },
+    "outbox_path": "discord/outbox/estlela-v105.json",
+    "outbox_commit": "f923e8c3afa82326d1c69bcf417987a74f89e52d",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-05.json: delivered",
+    "previous_day_publisher_runs": [
+      "37247353129: failure (Invalid generator timestamps)",
+      "37250860963: failure (Invalid generator timestamps)"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1"
+  }
+}
