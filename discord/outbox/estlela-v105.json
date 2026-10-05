@@ -1,0 +1,17 @@
+{
+  "release_id": "estlela-v105",
+  "date": "2026.10.06",
+  "headline": "活動実績から関連サービスへ",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "活動実績に3つの入口",
+      "benefit": "実績確認後、関連サービスへすぐ移動できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n紹介者別の活動実績ページ上部に、3つの入口を追加しました✨\n\n・ウェルマックスコンテンツ\n・人生スキル向上サロン\n・エステレラ公式サイト\n\n実績を確認したあと、必要なサービスへそのまま移動できます。各リンクは別タブで開きます。\n\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    105
+  ]
+}
