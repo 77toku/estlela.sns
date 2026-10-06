@@ -1,0 +1,30 @@
+{
+  "release_id": "estlela-v109",
+  "date": "2026.10.07",
+  "headline": "活動ページを6ボタンに整理",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "6ボタンメニュー",
+      "benefit": "本人ページから6つの目的地へ直接進めます。"
+    },
+    {
+      "type": "改善",
+      "title": "実績・履歴へ直行",
+      "benefit": "LP閲覧と動画送付後の履歴を選んで確認できます。"
+    },
+    {
+      "type": "改善",
+      "title": "管理画面の入口強化",
+      "benefit": "紹介者ごとのサイトと実績へすばやく移動できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n本人専用の活動ページを、必要な情報へ進みやすい6つのボタンに整理しました✨\n\n・ウェルマックス、人生スキル向上サロン、エステレラ\n・自分のサポートサイト\n・LPの閲覧実績、動画送付後の閲覧履歴\n\n管理画面にも紹介者ごとのサポートサイト・実績への入口を追加しました。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    106,
+    107,
+    108,
+    109
+  ]
+}
