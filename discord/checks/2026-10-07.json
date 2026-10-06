@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-07T07:05:20+09:00",
+  "cutoff_jst": "2026-10-07T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v109"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v105",
+    "baseline_source_versions": [
+      105
+    ],
+    "confirmed_public_versions": [
+      106,
+      107,
+      108,
+      109
+    ],
+    "latest_publish": {
+      "deployment_id": "appgdep_6ac44faa25048191b53e6fbbcfce2c3d",
+      "status": "succeeded",
+      "published_at": "2026-10-06T10:35:04.410070+09:00",
+      "source_commit": "c7b557da06ff8a859a8614d84f29064294563ea6"
+    },
+    "excluded_saved_version": {
+      "version": 110,
+      "reason": "保存のみでdeployment_idがなく、本番公開を確認できないため対象外"
+    },
+    "verified_changes": [
+      "本人専用の活動ページを、ウェルマックス・人生スキル向上サロン・エステレラ・自分のサポートサイト・LP閲覧実績・動画送付後の閲覧履歴の6ボタンメニューに整理。",
+      "LP閲覧実績は専用表示に分け、ボタン一覧へ戻れる導線を追加。",
+      "管理画面の紹介者別活動実績から、対象者のサポートサイト・LP閲覧実績・動画送付後の閲覧履歴へ進む入口を追加。"
+    ],
+    "verification": {
+      "deployed_source_diff": "c85ae393a64608c68da49354f5a5728efcabb767..c7b557da06ff8a859a8614d84f29064294563ea6",
+      "live_route": "https://estlela-business-support.honotoku.chatgpt.site/affiliate-activity",
+      "live_bundle": "assets/activity-client-CCwGJS-m.js",
+      "note": "Sitesのv106〜v109の成功済みpublish時刻、各source commit、v105との差分、本番の個別実績ルートと配信バンドルを照合。本人専用トークンは取得・記録していない。"
+    },
+    "outbox_path": "discord/outbox/estlela-v109.json",
+    "outbox_commit": "b80d622bcbebc931f0820744aa32cdf7bddc71d0",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-06.json: delivered",
+    "previous_day_publisher_runs": [
+      "37402102092: success",
+      "37404527884: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+  }
+}
