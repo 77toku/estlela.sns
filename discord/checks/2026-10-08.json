@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-10-08T07:06:40+09:00",
+  "checked_at": "2026-10-08T07:07:47+09:00",
   "cutoff_jst": "2026-10-08T07:00:00+09:00",
-  "status": "queued",
+  "status": "delivered",
   "release_ids": [
     "estlela-v112"
   ],
@@ -45,13 +45,22 @@
     },
     "outbox_path": "discord/outbox/estlela-v112.json",
     "outbox_commit": "323af16c5f6a08d6150a2cc5b82172a83a323549",
-    "pending_outbox_count": 1,
+    "pending_outbox_count": 0,
     "unresolved_attempt_count": 0,
     "previous_day_check": "discord/checks/2026-10-07.json: delivered",
     "previous_day_publisher_runs": [
       "37555819591: success",
       "37558998679: success"
     ],
-    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)",
+    "discord_delivery": {
+      "workflow_run_id": "37694016426",
+      "workflow_conclusion": "success",
+      "receipt_commit": "37d594bfc9c985cea306843e633e8637618a7783",
+      "discord_message_id": "1557514636746825870",
+      "content_hash": "5c815954e00e62cad6c19fb81bdb7266735386dd2d143b6e35f027b49669da5b",
+      "hash_verified": true,
+      "sent_at": "2026-10-08T07:07:07.262944+09:00"
+    }
   }
 }
