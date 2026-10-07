@@ -1,0 +1,27 @@
+{
+  "release_id": "estlela-v112",
+  "date": "2026.10.08",
+  "headline": "活動ルールを個別ページに追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "活動ルールを追加",
+      "benefit": "契約上の注意点を項目別に確認できます。"
+    },
+    {
+      "type": "改善",
+      "title": "原文ページへ直行",
+      "benefit": "要点から契約書の該当ページをすぐ開けます。"
+    },
+    {
+      "type": "改善",
+      "title": "確認事項を明示",
+      "benefit": "会社へ確認が必要な点を分けて把握できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n個別ページに「活動のルールについて」を追加しました📘\n\n・SNSや商品紹介で守ること\n・報酬、活動継続、他事業との両立などの要点\n・契約書の該当ページと、会社へ確認が必要な事項\n\n要点から原文へ移動でき、活動中の注意点を確認しやすくなりました。詳しい条件は契約書・約款の原文をご確認ください。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    112
+  ]
+}
