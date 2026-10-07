@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-08T07:06:40+09:00",
+  "cutoff_jst": "2026-10-08T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v112"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v109",
+    "baseline_source_versions": [
+      106,
+      107,
+      108,
+      109
+    ],
+    "confirmed_public_versions": [
+      112
+    ],
+    "skipped_saved_versions": [
+      {
+        "version": 110,
+        "reason": "保存のみでdeployment_idがなく、本番公開を確認できないため告知根拠に含めない"
+      },
+      {
+        "version": 111,
+        "reason": "保存のみでdeployment_idがなく、本番公開を確認できないため告知根拠に含めない"
+      }
+    ],
+    "latest_publish": {
+      "deployment_id": "appgdep_6ac5a514e2488191bccefe472e603188",
+      "status": "succeeded",
+      "published_at": "2026-10-07T10:52:05.958785+09:00",
+      "source_commit": "f4ca4bf609ec7e85dde29addb588a7b174636e66"
+    },
+    "verified_changes": [
+      "本人専用の個別ページに「活動のルールについて」を追加し、契約上の注意点を項目別に確認できるようにした。",
+      "各要点からエステレラエージェント契約書2025.10版の該当ページを開ける導線を追加した。",
+      "会社への確認が必要な事項と、契約書・約款の原文確認が必要な範囲を明示した。"
+    ],
+    "verification": {
+      "deployed_source_diff": "c7b557da06ff8a859a8614d84f29064294563ea6..f4ca4bf609ec7e85dde29addb588a7b174636e66",
+      "live_route": "https://estlela-business-support.honotoku.chatgpt.site/affiliate-activity",
+      "live_bundle": "assets/activity-client-CQbh4sXk.js",
+      "note": "Sitesのv112成功済みpublish時刻・source commit、v109との差分、本番の個別ページルートと配信バンドルを照合。本人専用トークンは取得・記録していない。"
+    },
+    "outbox_path": "discord/outbox/estlela-v112.json",
+    "outbox_commit": "323af16c5f6a08d6150a2cc5b82172a83a323549",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-07.json: delivered",
+    "previous_day_publisher_runs": [
+      "37555819591: success",
+      "37558998679: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+  }
+}
