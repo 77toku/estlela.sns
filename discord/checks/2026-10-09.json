@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-09T07:04:58+09:00",
+  "cutoff_jst": "2026-10-09T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v114"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v112",
+    "baseline_source_versions": [
+      112
+    ],
+    "confirmed_public_versions": [
+      113,
+      114
+    ],
+    "confirmed_publishes": [
+      {
+        "version": 113,
+        "deployment_id": "appgdep_6ac719f3ba288191813de08ed634fb29",
+        "status": "succeeded",
+        "published_at": "2026-10-08T13:24:03.368781+09:00",
+        "source_commit": "5dc9786662590ab6156af0d2833f3bb1405f452e"
+      },
+      {
+        "version": 114,
+        "deployment_id": "appgdep_6ac727fdf1088191a67b4e68f80cbcf6",
+        "status": "succeeded",
+        "published_at": "2026-10-08T14:23:40.032333+09:00",
+        "source_commit": "f784a9a5c059e06fe7dfff730f80cf0cb9f50092"
+      }
+    ],
+    "verified_changes": [
+      "通常のサポートサイトに、ホーム画面追加用の「エステレラサポート」アイコンと表示名を設定。",
+      "個別管理ページに、専用の「エステレラ管理」アイコン・表示名・マニフェストを設定。"
+    ],
+    "verification": {
+      "deployed_source_diff": "f4ca4bf609ec7e85dde29addb588a7b174636e66..f784a9a5c059e06fe7dfff730f80cf0cb9f50092",
+      "root_url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "management_route": "https://estlela-business-support.honotoku.chatgpt.site/affiliate-activity",
+      "root_apple_touch_icon": "/apple-touch-icon-estlela-support-180.png",
+      "management_apple_touch_icon": "/apple-touch-icon-estlela-management-180.png",
+      "management_manifest": "/estlela-management.webmanifest",
+      "note": "v113・v114の成功済みpublish時刻とソース差分を確認し、本番HTMLで通常サイトと個別管理ページのアイコン・表示名・マニフェストを照合。本人専用トークンは取得・記録していない。"
+    },
+    "outbox_path": "discord/outbox/estlela-v114.json",
+    "outbox_commit": "9d220da0d460fdcbf50d50975feaf7bb5f5defda",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-08.json: delivered",
+    "previous_day_publisher_runs": [
+      "37713352585: success",
+      "37717128756: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+  }
+}
