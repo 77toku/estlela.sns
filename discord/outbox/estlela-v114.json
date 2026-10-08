@@ -1,0 +1,23 @@
+{
+  "release_id": "estlela-v114",
+  "date": "2026.10.09",
+  "headline": "ホーム画面用アイコンを追加",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "サポート用アイコン",
+      "benefit": "通常サイトをホーム画面で見分けやすくしました。"
+    },
+    {
+      "type": "改善",
+      "title": "管理ページ用アイコン",
+      "benefit": "個別管理ページを専用アイコンで追加できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nサポートサイトと個別管理ページに、ホーム画面追加用の専用アイコンを設定しました📱\n\n・通常サイトは「エステレラサポート」アイコン\n・個別管理ページは「エステレラ管理」専用アイコン\n・iPhone・Androidのホーム画面で見分けやすく改善\n\nブラウザの「ホーム画面に追加」から利用できます。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    113,
+    114
+  ]
+}
