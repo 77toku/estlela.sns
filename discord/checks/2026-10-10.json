@@ -1,0 +1,62 @@
+{
+  "checked_at": "2026-10-10T07:00:35+09:00",
+  "cutoff_jst": "2026-10-10T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v130"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v114",
+    "baseline_source_versions": [
+      113,
+      114
+    ],
+    "confirmed_public_versions": [
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130
+    ],
+    "confirmed_publish_window": {
+      "first": "2026-10-09T12:57:20.279049+09:00",
+      "last": "2026-10-09T22:34:07.317173+09:00",
+      "deployments_succeeded": 16,
+      "current_live_version": 130
+    },
+    "verified_changes": [
+      "インフルエンサー向け・店舗向けの専用紹介ページを追加し、選択ページから案内先を選べるようにした。",
+      "認定条件・報酬動画・必要情報・申請フォームへの導線を各紹介ページに追加した。",
+      "個別活動ページに紹介先別ページへのリンクと紹介URLのコピー機能を追加した。"
+    ],
+    "verification": {
+      "deployed_source_diff": "f784a9a5c059e06fe7dfff730f80cf0cb9f50092..1cec2b21def93c88c23883331bd7acdbab27059b",
+      "source_files_changed": 23,
+      "partners_url": "https://estlela-business-support.honotoku.chatgpt.site/business/partners",
+      "influencer_url": "https://estlela-business-support.honotoku.chatgpt.site/business/influencer",
+      "store_url": "https://estlela-business-support.honotoku.chatgpt.site/business/store",
+      "note": "v115〜v130の全deploymentがsucceededで締切前に公開済み。最終ソース差分と本番3ページの表示を照合し、途中で取り消された変更は告知から除外した。個別活動ページは本人専用トークンを取得せず、公開済みv130ソースとdeployment対応で確認した。"
+    },
+    "outbox_path": "discord/outbox/estlela-v130.json",
+    "outbox_commit": "033a4c687388396665c75c0c2a98edca6343bd71",
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-09.json: delivered",
+    "previous_day_publisher_runs": [
+      "37870987225: success",
+      "37875239312: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+  }
+}
