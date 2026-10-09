@@ -1,0 +1,42 @@
+{
+  "release_id": "estlela-v130",
+  "date": "2026.10.10",
+  "headline": "紹介先別ガイドと申請案内を追加",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "紹介先別ガイド",
+      "benefit": "インフルエンサー・店舗向けの専用案内を選べます"
+    },
+    {
+      "type": "新機能",
+      "title": "申請案内を追加",
+      "benefit": "条件や必要書類を確認し、そのまま申請できます"
+    },
+    {
+      "type": "改善",
+      "title": "紹介リンク管理",
+      "benefit": "個別ページから案内を開き、紹介リンクをコピーできます"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nインフルエンサー向け・店舗向けの紹介ガイドを新設しました。認定条件や報酬動画、申請前の確認事項を整理し、各申請フォームへ進めます。個別活動ページから紹介先別ページを開き、紹介リンクをコピーできるようになりました。\nhttps://estlela-business-support.honotoku.chatgpt.site/business/partners",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123,
+    124,
+    125,
+    126,
+    127,
+    128,
+    129,
+    130
+  ]
+}
