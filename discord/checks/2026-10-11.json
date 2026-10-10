@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-11T07:04:37+09:00",
+  "cutoff_jst": "2026-10-11T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "baseline_release_id": "estlela-v130",
+    "baseline_source_versions": [
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130
+    ],
+    "latest_saved_version": 130,
+    "latest_public_version": 130,
+    "latest_publication": {
+      "deployment_id": "appgdep_6ac8ed12bf608191939558de42a2203a",
+      "status": "succeeded",
+      "published_at": "2026-10-09T22:34:07.317173+09:00",
+      "source_commit": "1cec2b21def93c88c23883331bd7acdbab27059b"
+    },
+    "verification": {
+      "site_updated_at": "2026-10-09T22:34:07.438391+09:00",
+      "live_url": "https://estlela-business-support.honotoku.chatgpt.site",
+      "checked_page": "https://estlela-business-support.honotoku.chatgpt.site/business/partners",
+      "note": "前回告知済みv130以降の保存版・公開版はなく、現行deploymentはsucceeded。本番の紹介先選択ページもv130の内容と一致した。"
+    },
+    "pending_outbox_count": 0,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-10.json: delivered",
+    "previous_day_publisher_runs": [
+      "38013221100: success",
+      "38015041789: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; previous failures were followed by successful scheduled runs)"
+  }
+}
