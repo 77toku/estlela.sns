@@ -1,0 +1,27 @@
+{
+  "release_id": "estlela-v131",
+  "date": "2026.10.12",
+  "headline": "紹介リンクの誤紐付けを防止",
+  "changes": [
+    {
+      "type": "不具合修正",
+      "title": "紹介IDを厳密確認",
+      "benefit": "確認できないIDを別の紹介者へ自動置換しません"
+    },
+    {
+      "type": "改善",
+      "title": "商品LP共有を安全化",
+      "benefit": "確認済みの紹介情報でのみ共有リンクを作成します"
+    },
+    {
+      "type": "改善",
+      "title": "動画送信導線を改善",
+      "benefit": "紹介者の確認後のみ専用ページへ進めます"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n紹介リンクの確認方法を改善しました。無効・不明な紹介IDを別の紹介者へ自動で置き換えず、確認できない場合は案内を表示します。商品LPの共有や「動画を送る」も、紹介情報の確認後のみ利用できるため、誤った紹介先への紐付けを防げます。\nhttps://estlela-business-support.honotoku.chatgpt.site/?ref=558453",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    131
+  ]
+}
