@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-12T07:08:08+09:00",
+  "cutoff_jst": "2026-10-12T07:00:00+09:00",
+  "status": "queued",
+  "release_ids": [
+    "estlela-v131"
+  ],
+  "evidence": {
+    "baseline_release_id": "estlela-v130",
+    "baseline_latest_public_version": 130,
+    "confirmed_public_versions": [
+      131
+    ],
+    "latest_publication": {
+      "deployment_id": "appgdep_6acb7128f2488191b9dbfdc250aac3bc",
+      "status": "succeeded",
+      "published_at": "2026-10-11T20:22:13.331573+09:00",
+      "source_commit": "b8f1f27e3915b97992a1edc899a2936554b993b5"
+    },
+    "source_diff": {
+      "from_commit": "1cec2b21def93c88c23883331bd7acdbab27059b",
+      "to_commit": "b8f1f27e3915b97992a1edc899a2936554b993b5",
+      "note": "無効・不明な紹介IDの既定紹介者への自動置換を廃止。商品LP共有と動画送信は紹介者確認後のみ有効化。"
+    },
+    "live_verification": {
+      "base_url": "https://estlela-business-support.honotoku.chatgpt.site",
+      "valid_ref_url": "https://estlela-business-support.honotoku.chatgpt.site/?ref=558453",
+      "lp_share_url": "https://estlela-business-support.honotoku.chatgpt.site/lp-share?ref=558453",
+      "note": "紹介IDなしでは確認エラーと無効ボタンを表示し、確認済みIDでは商品LP共有リンクと動画送信先に同じIDを維持することを本番画面で確認。"
+    },
+    "outbox": {
+      "path": "discord/outbox/estlela-v131.json",
+      "commit": "7d91fd657f283340a92158c7ef19d620e0a4de48"
+    },
+    "pending_outbox_count": 1,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-11.json: no_update",
+    "previous_day_publisher_runs": [
+      "38099096499: success",
+      "38101349904: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; stale, successful scheduled runs followed)"
+  }
+}
