@@ -1,7 +1,7 @@
 {
   "checked_at": "2026-10-12T07:08:08+09:00",
   "cutoff_jst": "2026-10-12T07:00:00+09:00",
-  "status": "queued",
+  "status": "delivered",
   "release_ids": [
     "estlela-v131"
   ],
@@ -32,7 +32,17 @@
       "path": "discord/outbox/estlela-v131.json",
       "commit": "7d91fd657f283340a92158c7ef19d620e0a4de48"
     },
-    "pending_outbox_count": 1,
+    "discord_delivery": {
+      "workflow_run_id": "38179192952",
+      "workflow_conclusion": "success",
+      "run_head_sha": "7d91fd657f283340a92158c7ef19d620e0a4de48",
+      "sent_record": "discord/sent/estlela-v131.json",
+      "discord_message_id": "1558964577520324709",
+      "content_hash": "217dc128987d1d43b273aaed673027faa36c47d0f312a060a9d1ff38e65a4231",
+      "sent_at": "2026-10-12T07:08:40.909428+09:00",
+      "verification": "release_id、送信記録、attempt、Actionsのhead SHA、正規化入力のSHA-256が一致。"
+    },
+    "pending_outbox_count": 0,
     "unresolved_attempt_count": 0,
     "previous_day_check": "discord/checks/2026-10-11.json: no_update",
     "previous_day_publisher_runs": [
