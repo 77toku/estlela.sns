@@ -1,0 +1,60 @@
+{
+  "checked_at": "2026-10-13T07:04:11+09:00",
+  "cutoff_jst": "2026-10-13T07:00:00+09:00",
+  "status": "error",
+  "release_ids": [],
+  "evidence": {
+    "baseline_release_id": "estlela-v131",
+    "baseline_latest_public_version": 131,
+    "detected_public_versions": [
+      132,
+      133,
+      134,
+      135
+    ],
+    "publication_evidence": [
+      {
+        "version": 132,
+        "deployment_id": "appgdep_6acc22f77d1481919fde78f109ea53ce",
+        "status": "succeeded",
+        "published_at": "2026-10-12T09:00:55.137320+09:00",
+        "source_commit": "d9b960ed180032e2a880df2f07fa7b42b8dd7995"
+      },
+      {
+        "version": 133,
+        "deployment_id": "appgdep_6acccb9187a0819182b422055fd70cf2",
+        "status": "succeeded",
+        "published_at": "2026-10-12T21:00:13.983984+09:00",
+        "source_commit": "ad06b051134f9cbddf568e3f7c85c700477a3a43"
+      },
+      {
+        "version": 134,
+        "deployment_id": "appgdep_6acccc683b548191a3e89da4cef5bcd2",
+        "status": "succeeded",
+        "published_at": "2026-10-12T21:03:51.853119+09:00",
+        "source_commit": "633614cec497c1a009aa0ef8262e5ade439d0cd6"
+      },
+      {
+        "version": 135,
+        "deployment_id": "appgdep_6acccd5ce30881918b2cc5e6e947bd5d",
+        "status": "succeeded",
+        "published_at": "2026-10-12T21:07:56.550949+09:00",
+        "source_commit": "3039ac6839fc9445ed37da31617b75d125bb6388"
+      }
+    ],
+    "failure": {
+      "step": "source_diff_verification",
+      "reason": "Sites source repository credential was issued, but Git source checkout returned an authentication error. The operation was stopped without trying another authentication path. Public deployment screenshots showed the same home screen and were insufficient to map v132–v135 to exact user-visible changes.",
+      "impact": "公開済みv132〜v135の変更内容と本番画面の対応を確定できないため、更新なしとも告知対象とも判定せず、原稿・outbox・Discord投稿を作成しない。"
+    },
+    "live_url": "https://estlela-business-support.honotoku.chatgpt.site",
+    "pending_outbox_count": 0,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-12.json: delivered",
+    "previous_day_publisher_runs": [
+      "38189854824: success",
+      "38193316535: success"
+    ],
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1 (open; stale)"
+  }
+}
