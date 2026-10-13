@@ -1,0 +1,96 @@
+{
+  "checked_at": "2026-10-14T07:00:15+09:00",
+  "cutoff_jst": "2026-10-14T07:00:00+09:00",
+  "status": "error",
+  "release_ids": [],
+  "evidence": {
+    "baseline_release_id": "estlela-v131",
+    "baseline_latest_public_version": 131,
+    "baseline_source_commit": "b8f1f27e3915b97992a1edc899a2936554b993b5",
+    "detected_public_versions": [
+      132,
+      133,
+      134,
+      135,
+      136
+    ],
+    "publication_evidence": [
+      {
+        "version": 132,
+        "source_commit": "d9b960ed180032e2a880df2f07fa7b42b8dd7995",
+        "deployment_id": "appgdep_6acc22f77d1481919fde78f109ea53ce",
+        "status": "succeeded",
+        "published_at": "2026-10-12T00:00:55.137320+00:00"
+      },
+      {
+        "version": 133,
+        "source_commit": "ad06b051134f9cbddf568e3f7c85c700477a3a43",
+        "deployment_id": "appgdep_6acccb9187a0819182b422055fd70cf2",
+        "status": "succeeded",
+        "published_at": "2026-10-12T12:00:13.983984+00:00"
+      },
+      {
+        "version": 134,
+        "source_commit": "633614cec497c1a009aa0ef8262e5ade439d0cd6",
+        "deployment_id": "appgdep_6acccc683b548191a3e89da4cef5bcd2",
+        "status": "succeeded",
+        "published_at": "2026-10-12T12:03:51.853119+00:00"
+      },
+      {
+        "version": 135,
+        "source_commit": "3039ac6839fc9445ed37da31617b75d125bb6388",
+        "deployment_id": "appgdep_6acccd5ce30881918b2cc5e6e947bd5d",
+        "status": "succeeded",
+        "published_at": "2026-10-12T12:07:56.550949+00:00"
+      },
+      {
+        "version": 136,
+        "source_commit": "0c89186d91dcee88d1a257d7a47af139102c701a",
+        "deployment_id": "appgdep_6acd9ca4f66c81918e04ac18d9098373",
+        "status": "succeeded",
+        "published_at": "2026-10-13T02:52:16.758470+00:00"
+      }
+    ],
+    "source_verification": "Supported Sites source helper successfully opened source at 0c89186d91dcee88d1a257d7a47af139102c701a. Diff against v131 inspected. Previous source authentication blocker did not recur.",
+    "source_change_candidates_not_announced": [
+      "個別管理ページの9枠メニュー整理・エステレラ管理ページの入口",
+      "今月のウェルマックスMTの案内と自己申告チェック"
+    ],
+    "excluded": "スマホ通知はdocs/monthly-reminders.mdで未接続・有効化前と記載。通知提供開始は告知しない。",
+    "failure": {
+      "step": "production_individual_page_verification",
+      "reason": "Production /affiliate-activity displayed 活動実績を表示できません and required the existing individual viewing URL. No authorized individual-page session or safe verification access was available. Did not obtain, mint, expose or bypass private viewing credentials. Source and deployment provenance alone do not establish rendered authenticated UI or working monthly checks.",
+      "impact": "本番画面と差分の対応および利用可能性が未確認。no_updateと扱わず原稿・outbox・Discord配信なし。比較基準はv131を維持。"
+    },
+    "live_url": "https://estlela-business-support.honotoku.chatgpt.site/affiliate-activity",
+    "local_test_limit": "Monthly reminder tests could not execute because TypeScript dependency was not installed; no passing test claim.",
+    "pending_outbox_count": 0,
+    "unresolved_attempt_count": 0,
+    "previous_day_check": "discord/checks/2026-10-13.json: error",
+    "previous_day_publisher_runs": [
+      {
+        "id": 38340535169,
+        "event": "schedule",
+        "conclusion": "failure",
+        "url": "https://github.com/77toku/estlela.sns/actions/runs/38340535169"
+      },
+      {
+        "id": 38338649910,
+        "event": "schedule",
+        "conclusion": "failure",
+        "url": "https://github.com/77toku/estlela.sns/actions/runs/38338649910"
+      },
+      {
+        "id": 38314508941,
+        "event": "push",
+        "conclusion": "success",
+        "url": "https://github.com/77toku/estlela.sns/actions/runs/38314508941"
+      }
+    ],
+    "previous_day_failure_step": "Run 38340535169: Publish unsent updates succeeded; Check morning generator result failed.",
+    "open_failure_issue": "https://github.com/77toku/estlela.sns/issues/1",
+    "automation_paused": true,
+    "automation_pause_reason": "本番個別画面の確認に必要なアクセスがないため、利用確認が可能になるまで朝の生成タスクを停止。GitHub Actionsは変更していない。",
+    "latest_saved_version_at_final_check": 136
+  }
+}
