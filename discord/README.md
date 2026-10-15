@@ -1,5 +1,10 @@
 # ESTLELA Discord 自動投稿
 
+> 2026-10-16: 朝の生成タスクは本番の正規検証アクセス不足で停止中です。
+> 再開条件と新規原稿の検証手順は [PRODUCTION_VERIFICATION.md](PRODUCTION_VERIFICATION.md)、
+> 調査記録は [RECOVERY_2026-10-16.md](RECOVERY_2026-10-16.md) を参照してください。
+> 以下の2026-09-24記載は当時の履歴であり、現在の有効状態を表しません。
+
 サポートサイトの公開更新を、ブランドデザインの画像と投稿文にしてDiscordへ送信します。
 
 ## 初回設定
@@ -28,7 +33,8 @@ Webhook URLは投稿権限そのものです。ファイル、画面、ログ、
 
 python discord/publish_updates.py --render-only discord/example-payload.json --output /tmp/estlela-update.png
 
-実際の送信テストでは、example-payload.jsonを日付と重複しないrelease_idに変更してdiscord/outboxへコピーし、ワークフローを手動実行します。
+実送信は本番検証が通った実在する更新だけを対象にします。サンプルを別IDで登録して
+送信しません。新規outboxには原稿と公開ソースに一致する検証レポートが必要です。
 
 ## 2026-09-24 点検結果と運用
 

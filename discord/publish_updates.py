@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 from render_update import render_update, validate_payload
+from verification import check_pending_verification
 
 
 ROOT = Path(__file__).resolve().parent
@@ -210,6 +211,9 @@ def semantic_hash(payload: dict[str, Any]) -> str:
 
 def check_queue() -> list[dict[str, Any]]:
     """Preflight the entire batch before sending any messages."""
+    for attempt in ATTEMPTS.glob("*.json"):
+        if not (SENT / attempt.name).exists():
+            raise RuntimeError(f"Unresolved delivery attempt: {attempt.stem}; reconcile before retry")
     for marker in SENT.glob("*.json"):
         if not (OUTBOX / marker.name).exists():
             raise ValueError(f"Missing historical outbox for receipt: {marker.name}")
@@ -246,6 +250,7 @@ def check_queue() -> list[dict[str, Any]]:
         elif (ATTEMPTS / f"{rid}.json").exists():
             raise RuntimeError(f"Unresolved delivery attempt: {rid}; reconcile before retry")
         else:
+            check_pending_verification(payload, ROOT)
             pending.append(payload)
     return pending
 
