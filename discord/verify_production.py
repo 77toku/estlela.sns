@@ -5,6 +5,7 @@ No screenshots, trace, HAR, storage-state export, private responses, or raw erro
 are written. The signed URL is consumed in memory and never navigated to.
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -68,6 +69,18 @@ def hosting_widget_request(url, method, resource_type):
             not parsed.query and not parsed.fragment)
 
 
+def blocked_request_code(url, resource_type):
+    """Identify blocked resources without storing URLs or query values."""
+    parsed = urlsplit(url)
+    kind = resource_type if resource_type in ('document', 'stylesheet', 'image', 'media', 'font', 'script', 'xhr', 'fetch', 'manifest', 'websocket', 'eventsource') else 'other'
+    origin = 'same_origin' if parsed.scheme == 'https' and parsed.netloc == urlsplit(SITE).netloc else 'external'
+    area = next((label for prefix, label in (('/_sites/', 'hosting'), ('/assets/', 'assets'), ('/_next/', 'next'), ('/cdn-cgi/', 'cdn_cgi'), ('/api/', 'api')) if parsed.path.startswith(prefix)), 'other')
+    # The hash excludes the entire query string and fragment, including IDs and
+    # tokens. Compare it only with known public resource paths during diagnosis.
+    fingerprint = hashlib.sha256((parsed.scheme + '://' + parsed.netloc + parsed.path).encode()).hexdigest()[:16]
+    return ':'.join((kind, origin, area, 'query' if parsed.query else 'no_query', fingerprint))
+
+
 async def run_browser(payload, raw_url):
     from playwright.async_api import async_playwright
     member, token = credentials(raw_url)
@@ -115,10 +128,9 @@ async def run_browser(payload, raw_url):
                 if allowed_request(request.url, request.method, request.headers, member):
                     await route.continue_()
                 else:
-                    # Retain only a fixed browser resource type, never a URL,
-                    # query string, headers, member identifier, or response body.
-                    kind = request.resource_type
-                    blocked.append(kind if kind in ('document', 'stylesheet', 'image', 'media', 'font', 'script', 'xhr', 'fetch', 'manifest', 'websocket', 'eventsource') else 'other')
+                    # Retain only categories and a query-free resource hash.
+                    # Never retain a URL, query values, headers, or private body.
+                    blocked.append(blocked_request_code(request.url, request.resource_type))
                     await route.abort()
             await context.route('**/*', guard)
             page = await context.new_page()
