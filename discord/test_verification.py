@@ -10,7 +10,7 @@ from unittest.mock import patch
 import publish_updates as publisher
 from prepare_update import prepare
 from verification import CHECKS, SITE, payload_hash, validate_report
-from verify_production import allowed_request, credentials, VerificationStopped
+from verify_production import allowed_request, credentials, hosting_widget_request, VerificationStopped
 
 
 class VerificationTests(unittest.TestCase):
@@ -139,4 +139,21 @@ class VerificationTests(unittest.TestCase):
                 self.assertFalse(allowed_request(SITE + path + '?ref=22', 'GET', {}, member))
                 self.assertFalse(allowed_request(SITE + path + '?token=' + 'c' * 64, 'GET', {}, member))
                 self.assertFalse(allowed_request('https://example.org' + path, 'GET', {}, member))
+
+    def test_only_exact_hosting_editor_script_is_intentionally_aborted(self):
+        widget = SITE + '/_sites/dispatch-assets/sites-widget.js'
+        self.assertFalse(allowed_request(widget, 'GET', {}, '991122'))
+        self.assertTrue(hosting_widget_request(widget, 'GET', 'script'))
+        for url, method, kind in (
+            (widget, 'POST', 'script'),
+            (widget, 'GET', 'fetch'),
+            (widget + '?ref=22', 'GET', 'script'),
+            (widget + '?token=' + 'c' * 64, 'GET', 'script'),
+            (widget + '#extra', 'GET', 'script'),
+            ('https://example.org/_sites/dispatch-assets/sites-widget.js', 'GET', 'script'),
+            (SITE + '/api/video-ticket', 'GET', 'script'),
+            (SITE + '/_sites/dispatch-assets/other.js', 'GET', 'script'),
+        ):
+            with self.subTest(url=url, method=method, kind=kind):
+                self.assertFalse(hosting_widget_request(url, method, kind))
 
