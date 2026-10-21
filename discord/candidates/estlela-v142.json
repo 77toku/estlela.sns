@@ -1,0 +1,35 @@
+{
+  "release_id": "estlela-v142",
+  "date": "2026.10.21",
+  "headline": "個別ページと月次チェック",
+  "changes": [
+    {
+      "type": "改善",
+      "title": "個別ページのメニュー",
+      "benefit": "9つのボタンから必要なページへ進めます。"
+    },
+    {
+      "type": "新機能",
+      "title": "今月の確認チェック",
+      "benefit": "アーカイブ確認とパスコード入力のチェックを保存できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\n個別ページのメニューを整理し、今月のウェルマックスMTの確認チェックを追加しました。\nアーカイブの確認とパスコード入力の状況を、ご自身でチェックして保存できます。\n個別ページは、お手元の本人専用URLからご利用ください。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    142
+  ],
+  "verification_target": {
+    "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+    "source_fingerprint": "19d4503f38c90660eb5c8412a1e0ff2681221bf866534c7b893a571b56cda7db",
+    "deployment_id": "appgdep_6ad8099fb7f08191871c4955e7f0a8f8",
+    "public_version": 142
+  },
+  "verification_requirements": [
+    "unauthenticated-denied",
+    "individual-menu",
+    "monthly-read",
+    "monthly-write-restore",
+    "source-stable"
+  ]
+}
