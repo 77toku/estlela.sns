@@ -1,9 +1,11 @@
 # ESTLELA Discord 自動投稿
 
-> 2026-10-21: 専用ID999999による個別メニュー・月次チェックの正式な本番検証5項目が成功しました。動画連携・通知・製品LP等の確認と初回実配信が未完了のため、朝の生成は停止を維持しています。
-> 再開条件と新規原稿の検証手順は [PRODUCTION_VERIFICATION.md](PRODUCTION_VERIFICATION.md)、
-> 現在の調査記録は [RECOVERY_2026-10-21.md](RECOVERY_2026-10-21.md) を参照してください。
-> 以下の2026-09-24記載は当時の履歴であり、現在の有効状態を表しません。
+> 2026-10-21: 本番検証9項目と追加の動画操作確認を完了し、132〜142版の更新を **estlela-v142** として既存Discordへ配信しました。
+> [publisher実行39546526323](https://github.com/77toku/estlela.sns/actions/runs/39546526323) は成功。真正のmessage ID・原稿ハッシュ・sentを照合済みです。
+> 既存の朝タスクを **毎日07:00（Asia/Tokyo）で有効化**。候補のmain登録から本番検証が自動起動するため、通常運用で手動サインイン・検証起動は不要です。
+> 比較基準は142版、outbox/sentは各19件、未送信・未解決attemptは0件。スマホ通知は準備中で、配信開始とは告知していません。
+> 新規原稿の検証手順は [PRODUCTION_VERIFICATION.md](PRODUCTION_VERIFICATION.md)、復旧の根拠は [RECOVERY_2026-10-21.md](RECOVERY_2026-10-21.md) を参照してください。
+> 以下の2026-09-24点検結果は当時の履歴です。
 
 サポートサイトの公開更新を、ブランドデザインの画像と投稿文にしてDiscordへ送信します。
 
@@ -19,7 +21,9 @@ Webhook URLは投稿権限そのものです。ファイル、画面、ログ、
 
 ## 処理の流れ
 
-- ChatGPTの毎朝タスクが、未告知の公開変更を discord/outbox にJSONで追加します。
+- ChatGPTの毎朝タスクが、未告知の公開変更を discord/candidates にまとめます。
+- mainの候補pushから本番検証を自動起動し、正確な原稿・公開ソースに一致する24時間以内の成功artifactを照合します。
+- prepare_update.pyと全履歴のキュー確認後、outboxとverificationを同一コミットでmainへ登録します。
 - GitHub Actionsが固定テンプレートから1080×1080のPNGを生成します。
 - 投稿文、画像、サイトURLをDiscord Webhookへ送ります。
 - Discordから返されたメッセージIDを discord/sent に保存します。
@@ -83,3 +87,4 @@ python discord/check_health.py
 ```
 
 本番送信は既存mainのActionsから行う。手元での送信には永続化可能なmain checkoutと `ESTLELA_DURABLE_DELIVERY=1` が必要。
+

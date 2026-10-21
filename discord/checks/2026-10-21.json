@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-10-21T04:53:25.451891+00:00",
+  "checked_at": "2026-10-21T04:56:19.152867+00:00",
   "cutoff_jst": "2026-10-21T07:00:00+09:00",
-  "status": "queued",
+  "status": "delivered",
   "release_ids": [
     "estlela-v142"
   ],
@@ -38,6 +38,20 @@
     "manual_video_checks": "999999 browser ID selection and creation dashboard, same-browser history, and legacy authenticated history passed on video public v44 (commit 1db9c2a896a858ae247466077f0c3d6b5e6c384a). No video created or sent.",
     "rollout_state": "Push notifications remain disabled and marked preparing; not announced. Internal provenance and superseded identity paths are not announced as new capabilities.",
     "history_reconciliation": "All 18 old outbox, 18 sent and 10 attempts unchanged; zero unresolved attempts before preparing v142.",
-    "delivery_state": "Verified payload and report prepared together; awaiting genuine Discord receipt."
+    "delivery_state": "Delivered by the existing publisher and reconciled against the genuine receipt.",
+    "delivery_run": "https://github.com/77toku/estlela.sns/actions/runs/39546526323",
+    "queued_commit": "adee4623a39b5c3d592c3abf2c10c9d1259075ce",
+    "receipt_commit": "822726e051b1d7055bd06d925248f7434ad5d4b5",
+    "discord_message_id": "1562328098190393397",
+    "sent_at": "2026-10-21T04:54:06.170644+00:00",
+    "baseline_after": "estlela-v142",
+    "reconciliation_after": "19 outbox and 19 genuine sent receipts; 11 attempts all matched; zero pending or unresolved. All 46 pre-existing history blobs unchanged.",
+    "automation": {
+      "id": "6a9f736d95108191b4c7870a44d7aced",
+      "is_enabled": true,
+      "schedule": "Daily 07:00 Asia/Tokyo",
+      "enabled_after_receipt": true,
+      "verification_trigger": "main candidate push; no daily manual sign-in or dispatch required"
+    }
   }
 }
