@@ -127,7 +127,9 @@ async def run_browser(payload, raw_url):
             checks['monthly-read'] = True
             changed = True  # Even an ambiguous write must be restored before success.
             async with page.expect_response(lambda r: urlsplit(r.url).path == '/api/monthly-tasks' and r.request.method == 'PATCH') as pending:
-                await checkbox.set_checked(not original['archiveDone'])
+                # The controlled checkbox updates only after the PATCH completes.
+                # Click once; the response and reload assertions below verify persistence.
+                await checkbox.click()
             if (await pending.value).status != 200:
                 raise VerificationStopped('monthly_write_failed')
             await page.reload(wait_until='networkidle')
