@@ -19,6 +19,8 @@ class DeliveryTests(unittest.TestCase):
         for name in ('outbox', 'sent', 'attempts', 'checks'):
             (self.root / name).mkdir()
         self.patches = [patch.object(p, name.upper(), self.root / name) for name in ('outbox', 'sent', 'attempts')]
+        # Evidence admission is exercised end-to-end in test_verification.py.
+        self.patches.append(patch.object(p, 'check_pending_verification'))
         for item in self.patches:
             item.start()
         self.payload = json.loads((p.ROOT / 'outbox/estlela-v79.json').read_text())
