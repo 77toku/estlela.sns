@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-22T07:02:12+09:00",
+  "cutoff_jst": "2026-10-22T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "comparison_baseline": "estlela-v142",
+    "latest_delivered_source_versions": [
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "latest_public_version": 142,
+    "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+    "deployment_id": "appgdep_6ad8099fb7f08191871c4955e7f0a8f8",
+    "deployment_status": "succeeded",
+    "deployment_updated_at": "2026-10-21T00:40:56.741880+00:00",
+    "production_page": "Public home page loaded successfully after the cutoff and showed the current support menu, including product referral and the 2–6 digit video ID entry.",
+    "version_check": "Sites history was rechecked after 2026-10-22 07:00 JST; no saved or deployed version newer than 142 exists.",
+    "previous_day": "discord/checks/2026-10-21.json is delivered for estlela-v142. Production verification run 39546249528 and publisher run 39546526323 succeeded; the genuine sent receipt is present.",
+    "delivery_reconciliation": "All 11 delivery attempts have a same-release sent receipt with an identical canonical content_hash; zero unresolved or orphan attempts.",
+    "open_failure_issues": 0,
+    "action": "No candidate, outbox payload, verification run, or Discord post was created because there was no new published update."
+  }
+}
