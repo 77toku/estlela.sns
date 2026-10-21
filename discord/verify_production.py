@@ -43,6 +43,14 @@ def allowed_request(url, method, headers, member):
     query = parse_qs(parsed.query, keep_blank_values=True)
     if 'token' in query:
         return False
+    if parsed.path.startswith('/cdn-cgi/challenge-platform/'):
+        # Run the site's normal Cloudflare browser check only after an explicit
+        # per-run opt-in. Do not forward application credentials in this path.
+        return (os.environ.get('ESTLELA_ALLOW_CLOUDFLARE_JSD') == '1' and
+                method in ('GET', 'POST') and not query and
+                not {'x-affiliate-id', 'x-activity-token'} & headers.keys() and
+                '..' not in parsed.path.split('/') and
+                re.fullmatch(r'/cdn-cgi/challenge-platform/[A-Za-z0-9_./-]+', parsed.path) is not None)
     if parsed.path == '/api/affiliate-activity':
         return method == 'GET' and query == {'ref': [member], 'session': ['mt']}
     if parsed.path == '/api/monthly-tasks':
@@ -209,7 +217,7 @@ def main():
             raise VerificationStopped('incomplete_browser_verification')
         report['status'] = 'passed'
     except VerificationStopped as error:
-        report['reason'] = str(error)  # Only fixed codes originate above.
+        report['reason'] = str(error)  # Only sanitized codes originate above.
     except Exception:
         report['status'] = 'error'
         report['reason'] = 'verification_failed'  # Never print Playwright/HTTP details.
