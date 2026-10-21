@@ -165,3 +165,23 @@ class VerificationTests(unittest.TestCase):
             self.assertNotIn(value, code)
         self.assertRegex(code, r'^script:same_origin:hosting:query:[a-f0-9]{16}$')
 
+    def test_cloudflare_browser_check_requires_explicit_opt_in_and_no_app_credentials(self):
+        path = '/cdn-cgi/challenge-platform/scripts/jsd/main.js'
+        with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '0'}):
+            self.assertFalse(allowed_request(SITE + path, 'GET', {}, '991122'))
+        with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '1'}):
+            self.assertTrue(allowed_request(SITE + path, 'GET', {}, '991122'))
+            self.assertTrue(allowed_request(SITE + '/cdn-cgi/challenge-platform/h/g/jsd/verification', 'POST', {}, '991122'))
+            for url, method, headers in (
+                (SITE + path, 'DELETE', {}),
+                (SITE + path + '?ref=22', 'GET', {}),
+                (SITE + path + '?token=' + 'c' * 64, 'GET', {}),
+                (SITE + path, 'GET', {'x-affiliate-id': '991122'}),
+                (SITE + path, 'GET', {'x-activity-token': 'c' * 64}),
+                ('https://example.org' + path, 'GET', {}),
+                (SITE + '/cdn-cgi/trace', 'GET', {}),
+                (SITE + '/cdn-cgi/challenge-platform/../api/private', 'GET', {}),
+            ):
+                with self.subTest(url=url, method=method):
+                    self.assertFalse(allowed_request(url, method, headers, '991122'))
+
