@@ -52,7 +52,11 @@ def allowed_request(url, method, headers, member):
         return False
     if parsed.path == '/affiliate-activity':
         return method == 'GET' and query.get('ref') == [member] and query.get('session') == ['mt'] and not set(query) - {'ref', 'session', 'view'}
-    return method == 'GET' and not query and (parsed.path.startswith('/assets/') or parsed.path.startswith('/_next/') or parsed.path in ('/favicon.svg', '/estlela-management.webmanifest', '/apple-touch-icon-estlela-management-180.png'))
+    # Chromium can fetch the public icons declared by the management manifest.
+    return method == 'GET' and not query and (parsed.path.startswith('/assets/') or parsed.path.startswith('/_next/') or parsed.path in (
+        '/favicon.svg', '/estlela-management.webmanifest',
+        '/apple-touch-icon-estlela-management-180.png',
+        '/estlela-management-192.png', '/estlela-management-512.png'))
 
 
 async def run_browser(payload, raw_url):
@@ -96,7 +100,10 @@ async def run_browser(payload, raw_url):
                 if allowed_request(request.url, request.method, request.headers, member):
                     await route.continue_()
                 else:
-                    blocked.append(True)  # Never retain a request URL or headers.
+                    # Retain only a fixed browser resource type, never a URL,
+                    # query string, headers, member identifier, or response body.
+                    kind = request.resource_type
+                    blocked.append(kind if kind in ('document', 'stylesheet', 'image', 'media', 'font', 'script', 'xhr', 'fetch', 'manifest', 'websocket', 'eventsource') else 'other')
                     await route.abort()
             await context.route('**/*', guard)
             page = await context.new_page()
@@ -139,7 +146,7 @@ async def run_browser(payload, raw_url):
             if updated != {**original, 'archiveDone': not original['archiveDone']} or await checkbox.is_checked() == original['archiveDone']:
                 raise VerificationStopped('monthly_persistence_failed')
             if blocked:
-                raise VerificationStopped('unexpected_network_request_blocked')
+                raise VerificationStopped('unexpected_network_request_blocked:' + ','.join(sorted(set(blocked))))
         finally:
             try:
                 if changed and original is not None:
@@ -189,3 +196,4 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
