@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-10-21T04:15:50.742Z",
+  "checked_at": "2026-10-21T04:27:05.486Z",
   "cutoff_jst": "2026-10-21T07:00:00+09:00",
   "status": "error",
   "release_ids": [
     "estlela-v142"
   ],
-  "evidence": "配信済み比較基準は131版。公開142版は専用ID999999・環境revision6で確認。GitHub Secretとmain限定検証環境は設定済み。本番検証run39542595300はCloudflare JavaScript Detectionsの通信を検証側が遮断してblocked。artifact12319339469と候補の原稿ハッシュ・公開ソースを照合したが、正式な成功レポートではない。自動確認の実行承認待ち。動画連携・通知・製品LP等の未確認変更は未解消。outbox追加・Discord実送信・朝タスク再開は行っていない。"
+  "evidence": "前回記録（2026-10-21T04:15:50.742Z）: 配信済み比較基準は131版。公開142版は専用ID999999・環境revision6で確認。GitHub Secretとmain限定検証環境は設定済み。本番検証run39542595300はCloudflare JavaScript Detectionsの通信を検証側が遮断してblocked。artifact12319339469と候補の原稿ハッシュ・公開ソースを照合したが、正式な成功レポートではない。自動確認の実行承認待ち。動画連携・通知・製品LP等の未確認変更は未解消。outbox追加・Discord実送信・朝タスク再開は行っていない。\n追加確認（2026-10-21T04:27:05.486Z）: ユーザー承認後、run39543878171がmainの7d29de0014ccb75f96d6f699aedaa5f96ba964dcで成功。artifact12320543142のZIP SHA-256と、元のverification.jsonの公開142版・原稿ハッシュ・5項目すべてtrue・時刻をvalidate_reportで照合した。個別メニューと月次チェックの正式な本番検証は完了。動画連携・通知・製品LP等は未確認、outbox追加・Discord実送信・朝タスク再開は未実施のため、全体のstatusはerrorのまま。比較基準131版を維持。"
 }
