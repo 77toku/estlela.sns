@@ -1,6 +1,9 @@
 name: ESTLELA production verification
 
 on:
+  push:
+    branches: [main]
+    paths: ['discord/candidates/estlela-v*.json']
   workflow_dispatch:
     inputs:
       candidate:
@@ -29,23 +32,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate candidate path without interpolating workflow input into shell
+      - name: Select exactly one candidate at the immutable event commit
+        id: candidate
         env:
           CANDIDATE: ${{ inputs.candidate }}
         run: |
           python - <<'PY'
-          import os, pathlib, re
-          value = os.environ['CANDIDATE']
+          import json, os, pathlib, re, subprocess
+          if os.environ['GITHUB_EVENT_NAME'] == 'push':
+              event = json.loads(pathlib.Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+              before = event['before']
+              after = os.environ['GITHUB_SHA']
+              if not re.fullmatch('[a-f0-9]{40}', before) or not re.fullmatch('[a-f0-9]{40}', after) or event['after'] != after:
+                  raise SystemExit('Invalid event commits')
+              paths = subprocess.check_output(['git', 'diff', '--name-only', '--diff-filter=AM', before, after, '--', 'discord/candidates/'], text=True).splitlines()
+              if len(paths) != 1:
+                  raise SystemExit('Push must change exactly one reviewed candidate')
+              value = paths[0]
+          else:
+              value = os.environ['CANDIDATE']
           if not re.fullmatch(r'discord/candidates/estlela-v[0-9]+\.json', value):
               raise SystemExit('Invalid candidate path')
           path = pathlib.Path(value)
           if not path.is_file() or path.is_symlink():
               raise SystemExit('Reviewed candidate is missing')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('path=' + value + '\n')
           PY
       - name: Install isolated verifier
         run: |
@@ -54,8 +72,8 @@ jobs:
       - name: Verify with the dedicated account through normal authentication
         env:
           ESTLELA_VERIFICATION_URL: ${{ secrets.ESTLELA_VERIFICATION_URL }}
-          CANDIDATE: ${{ inputs.candidate }}
-          ESTLELA_ALLOW_CLOUDFLARE_JSD: ${{ inputs.allow_cloudflare_jsd && '1' || '0' }}
+          CANDIDATE: ${{ steps.candidate.outputs.path }}
+          ESTLELA_ALLOW_CLOUDFLARE_JSD: ${{ (github.event_name == 'push' || inputs.allow_cloudflare_jsd) && '1' || '0' }}
         run: python discord/verify_production.py --candidate "$CANDIDATE" --output /tmp/verification.json
       - name: Preserve only the sanitized verification report
         if: always()
@@ -65,3 +83,4 @@ jobs:
           path: /tmp/verification.json
           if-no-files-found: ignore
           retention-days: 7
+

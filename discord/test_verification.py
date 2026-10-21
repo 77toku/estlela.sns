@@ -9,8 +9,8 @@ from unittest.mock import patch
 
 import publish_updates as publisher
 from prepare_update import prepare
-from verification import CHECKS, SITE, payload_hash, validate_report
-from verify_production import allowed_request, blocked_request_code, credentials, hosting_widget_request, VerificationStopped
+from verification import CHECKS, EXTENDED_CHECKS, SITE, payload_hash, validate_report
+from verify_production import VIDEO, allowed_public_request, excluded_public_request, allowed_request, blocked_request_code, credentials, hosting_widget_request, VerificationStopped
 
 
 class VerificationTests(unittest.TestCase):
@@ -45,6 +45,57 @@ class VerificationTests(unittest.TestCase):
         altered = {**self.payload, 'headline': 'Different announcement'}
         with self.assertRaises(ValueError):
             validate_report(altered, self.report)
+
+    def test_extended_release_requires_every_public_check_and_exact_payload(self):
+        self.payload['verification_requirements'] = list(EXTENDED_CHECKS)
+        full = {**self.report, 'payload_hash': payload_hash(self.payload),
+                'checks': {key: True for key in EXTENDED_CHECKS}}
+        validate_report(self.payload, full)
+        for key in EXTENDED_CHECKS:
+            incomplete = copy.deepcopy(full)
+            del incomplete['checks'][key]
+            with self.subTest(missing=key), self.assertRaises(ValueError):
+                validate_report(self.payload, incomplete)
+        with self.assertRaises(ValueError):
+            validate_report(self.payload, self.report)
+        self.payload['verification_requirements'].append('invented-check')
+        with self.assertRaises(ValueError):
+            validate_report(self.payload, full)
+
+    def test_public_profile_denies_writes_other_ids_secret_headers_and_purchase_navigation(self):
+        member = '999999'
+        valid = (
+            SITE + '/?ref=999999',
+            SITE + '/lp-share?ref=999999&product=anoa-advance-cream&coupon=TESTONLY',
+            SITE + '/go/anoa-advance-cream?id=999999&preview=1&coupon=TESTONLY',
+            SITE + '/lp/anoa-advance-cream?id=999999&preview=1',
+            VIDEO + '/admin?mode=browser&ref=999999&support_ref=999999',
+            VIDEO + '/assets/admin.js?v=20261020-id-switch',
+        )
+        for url in valid:
+            self.assertTrue(allowed_public_request(url, 'GET', {}, member))
+            self.assertFalse(allowed_public_request(url, 'POST', {}, member))
+        self.assertTrue(allowed_public_request(VIDEO + '/api/member/me', 'GET', {'x-video-mode': 'browser'}, member))
+        for url in (SITE + '/lp/anoa-advance-cream?id=999999',
+                    SITE + '/lp/anoa-advance-cream?id=282500&preview=1',
+                    SITE + '/official/anoa-advance-cream?id=999999&target=shop&preview=1',
+                    VIDEO + '/admin?mode=linked&ref=999999',
+                    VIDEO + '/api/admin/invitations', VIDEO + '/api/member/apply',
+                    VIDEO + '/api/owner/member-summary',
+                    'https://member.estlela.jp/U999999', 'https://www.youtube.com/embed/example'):
+            self.assertFalse(allowed_public_request(url, 'GET', {}, member))
+            self.assertFalse(allowed_public_request(url, 'POST', {}, member))
+        for key in ('x-affiliate-id', 'x-activity-token'):
+            self.assertFalse(allowed_public_request(valid[-1], 'GET', {key: 'secret'}, member))
+        self.assertTrue(excluded_public_request(SITE + '/api/page-view', 'POST', 'fetch'))
+        self.assertFalse(excluded_public_request(SITE + '/api/page-view?ref=22', 'POST', 'fetch'))
+        self.assertFalse(excluded_public_request(SITE + '/api/monthly-tasks', 'PATCH', 'fetch'))
+        challenge = VIDEO + '/cdn-cgi/challenge-platform/h/g/jsd/verification'
+        with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '0'}):
+            self.assertFalse(allowed_public_request(challenge, 'POST', {}, member))
+        with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '1'}):
+            self.assertTrue(allowed_public_request(challenge, 'POST', {}, member))
+            self.assertFalse(allowed_public_request(challenge, 'POST', {'x-activity-token': 'secret'}, member))
 
     def test_unverified_generation_and_delivery_are_blocked(self):
         with self.assertRaises(ValueError):

@@ -2,9 +2,9 @@
 
 ## 現時点
 
-朝のChatGPT生成タスクは停止のまま。GitHubの既存配信cronは変更しない。
-本書・テスト・新しい検証経路の追加は、本人用画面の本番確認成功を意味しない。
-本番の正規アクセスで一連の検証を完了するまでoutboxを作らない。
+朝の生成タスクは、初回の本番検証・実配信・sent照合が完了してから再開する。
+GitHubの既存配信cronは変更しない。mainの候補原稿のpushから検証を自動起動し、
+真正の成功artifactを確認してからoutboxへ進める。候補の登録だけでは配信しない。
 
 個別ページは `ref` だけでは認証されない。署名付き個別URLのトークン、または
 そのトークンを検証して発行する `__Host-estlela-mt` Cookieが必要。
@@ -39,21 +39,28 @@ Sitesのバージョン・deployment statusと正確なソースを取得し、�
 - `verification_target.source_fingerprint`: 上記の64桁の計算結果
 - `verification_target.deployment_id`: 同じ版の成功したSites deployment ID
 - `verification_target.public_version`: 同じ公開版番号、source_versionsの最大値と一致
-- `verification_requirements`: 次の配列（順序も固定）
+- `verification_requirements`: 個別メニュー・月次チェックだけの既存プロファイルは次の配列（順序も固定）
   `["unauthenticated-denied","individual-menu","monthly-read","monthly-write-restore","source-stable"]`
 
-現在の検証対象は個別メニューと月次チェックに限定する。この対象以外の変更が未解決なら
-比較基準を進めない。本番137版の動画連携、スマホ通知、別画面の動作がこれで
-確認できたとは扱わない。必要なら対象のテストを追加してから原稿化する。
+132〜142版を集約する原稿には、上記5項目に次の4項目をこの順で追加した
+9項目の拡張プロファイルを使用する。
+`["public-referral","cream-lp","video-id-entry","notification-not-ready"]`
+既存の5項目成功artifactは、拡張後の原稿とはハッシュが異なるため流用できない。
+任意のチェック名・一部省略は拒否する。新たな対象機能は対応する検証を追加するまで告知しない。
 
 ## 3. 本番の画面と操作を検証する
 
-Actionsの `ESTLELA production verification` をmainで手動実行し、candidateに上記のパスを指定。
+mainの1回のpushで `discord/candidates/estlela-vNNN.json` を1件だけ追加・更新する。
+`ESTLELA production verification` がイベントの不変コミットをcheckoutし、変更された候補を
+安全に選択して実行する。複数候補・無効なパス・削除だけのpushは拒否する。
+日々の生成はGitHubコネクタのGit tree/commit/ref操作でこのpushを作る。
+Actionsの手動実行でも、mainのcandidateに上記のパスを指定できる。
 環境Secretがない場合、または事前確認に失敗する場合はブロックされる。
 
 CloudflareのJavaScript Detectionsが注入される場合、検証の通信制限が通常の確認処理も
-遮断することがある。bot対策の確認を実行する承認を得た実行でのみ、手動入力
-`allow_cloudflare_jsd` を有効にする（既定はfalse）。同じオリジンの
+遮断することがある。所有者は今回の復旧で通常のJavaScript Detectionsの実行を承認済み。
+main候補pushでは通常の確認処理を実行し、手動実行は `allow_cloudflare_jsd` で選ぶ（既定false）。
+検証対象のサポート・動画の各オリジンの
 `/cdn-cgi/challenge-platform/` へのクエリなしGET/POSTだけを通し、本人IDや署名トークンの
 アプリ用ヘッダーを渡さない。Cloudflareの判定を通常どおりブラウザーで行い、
 対話型の確認やアクセス拒否が出た場合は停止する。
@@ -70,7 +77,16 @@ Sitesの編集用ウィジェットは実行せず、正確なスクリプト要
 強制終了等で復元できなかった場合は専用アカウントだけを所有者が確認する。
 新規Cookieは通常の90日期限に従う。毎回新規ブラウザーで、Cookieを保存・出力しない。
 
-ブラウザーは他のID、管理者API、通知登録、動画連携、外部への通信を遮断する。
+拡張プロファイルは公開トップ、紹介者IDを保ったLP共有、クリームLPと画像、
+公式登録・購入リンクのリダイレクト先（追跡せず）、動画のID選択フォームを確認する。
+LPは常にpreview=1で開く。動画フォームはサポートIDの初期選択・別ID・桁数検証を
+確認するが送信しない。毎回新しい検証用動画利用者を作って利用件数を増やさないためである。
+実際の999999によるID選択後の作成画面・同じブラウザーの履歴・従来の本人確認付き履歴は
+2026-10-21に別途実操作で確認した。動画URLの作成・送信・視聴開始はしていない。
+スマホ通知は「準備中」の無効ボタンを確認する。配信開始とは扱わず、原稿にも含めない。
+
+ブラウザーは他のID、管理者API、通知登録、動画作成・会員登録のPOST、外部への通信を遮断する。
+公開トップの集計POSTと無関係な商品画像1件は送信せず検証対象外とする。
 画面画像、トレース、HAR、Cookie、個別実績やエラーの生本文は保存しない。
 artifactは可否・ソース識別子・原稿のハッシュだけ。開始・終了の指紋不一致も失敗する。
 
@@ -98,6 +114,7 @@ Discordから返されたmessage IDと原稿ハッシュをsentへ保存する�
 真正のsentとActionsを照合後のみ当日のchecksへdeliveredを記録する。検証前の日時や
 過去日の成功は埋めない。生成タスクのプロンプトにもこの手順を反映し、初回の本番検証・
 配信・控え照合が完了してから既存07:00タスクを有効化する。
+初回のsent照合後に当日の記録・復旧経緯・生成タスクの現在の比較基準を更新する。
 Issue #1は解消確認まで開いたままにする。
 
 ## 送信しないテスト
@@ -110,3 +127,4 @@ python discord/publish_updates.py --check-only
 テストの成功は本番表示やDiscordへの実送信の証明ではない。
 テストは一時ディレクトリと模擬Discord応答を使い、PNG生成は実コードを実行する。
 既存の配信記録と送信結果不明時の停止も確認する。
+

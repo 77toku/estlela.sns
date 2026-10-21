@@ -6,6 +6,7 @@ from datetime import datetime, timedelta, timezone
 
 SITE = 'https://estlela-business-support.honotoku.chatgpt.site'
 CHECKS = ('unauthenticated-denied', 'individual-menu', 'monthly-read', 'monthly-write-restore', 'source-stable')
+EXTENDED_CHECKS = CHECKS + ('public-referral', 'cream-lp', 'video-id-entry', 'notification-not-ready')
 
 
 def payload_hash(payload):
@@ -33,8 +34,8 @@ def validate_target(payload):
         raise ValueError('Target must be the latest included public version')
     if payload.get('release_id') != f'estlela-v{latest}':
         raise ValueError('Release ID must match the verified public version')
-    if payload.get('verification_requirements') != list(CHECKS):
-        raise ValueError('This verifier supports the individual menu and monthly checks only')
+    if payload.get('verification_requirements') not in (list(CHECKS), list(EXTENDED_CHECKS)):
+        raise ValueError('Unsupported production verification profile')
     return target
 
 
@@ -45,7 +46,7 @@ def validate_report(payload, report, now=None):
         raise ValueError('Production verification has not passed')
     if report.get('payload_hash') != payload_hash(payload) or report.get('target') != target:
         raise ValueError('Verification does not match this exact announcement/source')
-    if report.get('checks') != {key: True for key in CHECKS}:
+    if report.get('checks') != {key: True for key in payload['verification_requirements']}:
         raise ValueError('Production verification is incomplete')
     checked = datetime.fromisoformat(report.get('checked_at', ''))
     if checked.tzinfo is None or not now - timedelta(hours=24) <= checked <= now:
@@ -58,3 +59,4 @@ def check_pending_verification(payload, root):
     if not path.exists():
         raise ValueError('Missing production verification: ' + payload['release_id'])
     validate_report(payload, json.loads(path.read_text(encoding='utf-8')))
+

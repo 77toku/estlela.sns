@@ -1,22 +1,37 @@
 {
   "release_id": "estlela-v142",
   "date": "2026.10.21",
-  "headline": "個別ページと月次チェック",
+  "headline": "クリームLPと活動サポートを更新",
   "changes": [
     {
       "type": "改善",
-      "title": "個別ページのメニュー",
-      "benefit": "9つのボタンから必要なページへ進めます。"
+      "title": "個別ページと月次チェック",
+      "benefit": "9つのメニューと、今月のMTの確認チェックを利用できます。"
     },
     {
       "type": "新機能",
-      "title": "今月の確認チェック",
-      "benefit": "アーカイブ確認とパスコード入力のチェックを保存できます。"
+      "title": "アドバンスクリームLP",
+      "benefit": "成分や使い方を確認し、自分の紹介リンクを共有できます。"
+    },
+    {
+      "type": "改善",
+      "title": "動画に使うIDを選択",
+      "benefit": "サポートサイトのIDか、別の2〜6桁のIDを選べます。"
     }
   ],
-  "message": "【エステレラ サポート更新】\n個別ページのメニューを整理し、今月のウェルマックスMTの確認チェックを追加しました。\nアーカイブの確認とパスコード入力の状況を、ご自身でチェックして保存できます。\n個別ページは、お手元の本人専用URLからご利用ください。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "message": "【エステレラ サポート更新】\n個別ページのメニューを整理し、今月のウェルマックスMTの確認チェックを追加しました。\nANOAアドバンスクリームの商品LPも登場。成分や使い方を確認して紹介できます。\n動画の作成画面では、サポートサイトのIDか別の2〜6桁のIDを選べるようになりました。\nhttps://estlela-business-support.honotoku.chatgpt.site",
   "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
   "source_versions": [
+    132,
+    133,
+    134,
+    135,
+    136,
+    137,
+    138,
+    139,
+    140,
+    141,
     142
   ],
   "verification_target": {
@@ -30,6 +45,10 @@
     "individual-menu",
     "monthly-read",
     "monthly-write-restore",
-    "source-stable"
+    "source-stable",
+    "public-referral",
+    "cream-lp",
+    "video-id-entry",
+    "notification-not-ready"
   ]
 }
