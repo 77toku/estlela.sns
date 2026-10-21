@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "status": "blocked",
+  "checks": {},
+  "payload_hash": "561bac74d29cbe16a203218372898ee2d1c560e0e54f3d03d6d6cccd69b189c3",
+  "target": {
+    "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+    "source_fingerprint": "19d4503f38c90660eb5c8412a1e0ff2681221bf866534c7b893a571b56cda7db",
+    "deployment_id": "appgdep_6ad8099fb7f08191871c4955e7f0a8f8",
+    "public_version": 142
+  },
+  "reason": "unexpected_network_request_blocked:script:same_origin:cdn_cgi:no_query:69d8b1cfd3ffc434",
+  "checked_at": "2026-10-21T04:11:21.545465+00:00"
+}
