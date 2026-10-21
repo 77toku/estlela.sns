@@ -7,6 +7,11 @@ on:
         description: 'Reviewed discord/candidates/<release_id>.json from main'
         type: string
         required: true
+      allow_cloudflare_jsd:
+        description: 'Run the site-provided Cloudflare browser check (explicit approval required)'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -50,6 +55,7 @@ jobs:
         env:
           ESTLELA_VERIFICATION_URL: ${{ secrets.ESTLELA_VERIFICATION_URL }}
           CANDIDATE: ${{ inputs.candidate }}
+          ESTLELA_ALLOW_CLOUDFLARE_JSD: ${{ inputs.allow_cloudflare_jsd && '1' || '0' }}
         run: python discord/verify_production.py --candidate "$CANDIDATE" --output /tmp/verification.json
       - name: Preserve only the sanitized verification report
         if: always()
