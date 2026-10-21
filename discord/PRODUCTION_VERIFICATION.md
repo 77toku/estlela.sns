@@ -51,6 +51,18 @@ Sitesのバージョン・deployment statusと正確なソースを取得し、�
 Actionsの `ESTLELA production verification` をmainで手動実行し、candidateに上記のパスを指定。
 環境Secretがない場合、または事前確認に失敗する場合はブロックされる。
 
+CloudflareのJavaScript Detectionsが注入される場合、検証の通信制限が通常の確認処理も
+遮断することがある。bot対策の確認を実行する承認を得た実行でのみ、手動入力
+`allow_cloudflare_jsd` を有効にする（既定はfalse）。同じオリジンの
+`/cdn-cgi/challenge-platform/` へのクエリなしGET/POSTだけを通し、本人IDや署名トークンの
+アプリ用ヘッダーを渡さない。Cloudflareの判定を通常どおりブラウザーで行い、
+対話型の確認やアクセス拒否が出た場合は停止する。
+公式説明: https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/
+
+Sitesの編集用ウィジェットは実行せず、正確なスクリプト要求を遮断したまま検証対象外とする。
+その他の想定外通信は引き続き失敗。診断は固定の分類と、クエリ・フラグメントを除く
+リソース照合用ハッシュのみとし、URL・認証情報・応答本文を保存しない。
+
 検証は専用IDを事前確認してから既存の本人用セッションを作成する。画面のURLに
 署名トークンは含めない。実際の390px画面で9枠メニュー・管理ページのリンク・
 月次チェックを確認し、専用アカウントのアーカイブチェックを切り替えて再読込し、
