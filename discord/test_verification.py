@@ -129,3 +129,14 @@ class VerificationTests(unittest.TestCase):
             self.assertFalse(allowed_request(url, method, headers, member))
         self.assertTrue(allowed_request(SITE + '/api/monthly-tasks', 'PATCH', {'x-affiliate-id': member}, member))
         self.assertTrue(allowed_request(SITE + '/affiliate-activity?ref=991122&session=mt', 'GET', {}, member))
+
+    def test_management_manifest_icons_are_public_read_only_resources(self):
+        member = '991122'
+        for path in ('/estlela-management-192.png', '/estlela-management-512.png'):
+            with self.subTest(path=path):
+                self.assertTrue(allowed_request(SITE + path, 'GET', {}, member))
+                self.assertFalse(allowed_request(SITE + path, 'POST', {}, member))
+                self.assertFalse(allowed_request(SITE + path + '?ref=22', 'GET', {}, member))
+                self.assertFalse(allowed_request(SITE + path + '?token=' + 'c' * 64, 'GET', {}, member))
+                self.assertFalse(allowed_request('https://example.org' + path, 'GET', {}, member))
+
