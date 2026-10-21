@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "checks": {
+    "unauthenticated-denied": true,
+    "individual-menu": true,
+    "monthly-read": true,
+    "notification-not-ready": true,
+    "public-referral": true,
+    "cream-lp": true,
+    "video-id-entry": true,
+    "monthly-write-restore": true,
+    "source-stable": true
+  },
+  "payload_hash": "64886e7d2c91fb85b33a1ba225d86f8cf8d109b79fd6b399c09946d9c94026c0",
+  "target": {
+    "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+    "source_fingerprint": "19d4503f38c90660eb5c8412a1e0ff2681221bf866534c7b893a571b56cda7db",
+    "deployment_id": "appgdep_6ad8099fb7f08191871c4955e7f0a8f8",
+    "public_version": 142
+  },
+  "checked_at": "2026-10-21T04:51:25.867226+00:00"
+}

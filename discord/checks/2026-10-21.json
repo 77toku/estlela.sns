@@ -1,9 +1,43 @@
 {
-  "checked_at": "2026-10-21T04:27:05.486Z",
+  "checked_at": "2026-10-21T04:53:25.451891+00:00",
   "cutoff_jst": "2026-10-21T07:00:00+09:00",
-  "status": "error",
+  "status": "queued",
   "release_ids": [
     "estlela-v142"
   ],
-  "evidence": "前回記録（2026-10-21T04:15:50.742Z）: 配信済み比較基準は131版。公開142版は専用ID999999・環境revision6で確認。GitHub Secretとmain限定検証環境は設定済み。本番検証run39542595300はCloudflare JavaScript Detectionsの通信を検証側が遮断してblocked。artifact12319339469と候補の原稿ハッシュ・公開ソースを照合したが、正式な成功レポートではない。自動確認の実行承認待ち。動画連携・通知・製品LP等の未確認変更は未解消。outbox追加・Discord実送信・朝タスク再開は行っていない。\n追加確認（2026-10-21T04:27:05.486Z）: ユーザー承認後、run39543878171がmainの7d29de0014ccb75f96d6f699aedaa5f96ba964dcで成功。artifact12320543142のZIP SHA-256と、元のverification.jsonの公開142版・原稿ハッシュ・5項目すべてtrue・時刻をvalidate_reportで照合した。個別メニューと月次チェックの正式な本番検証は完了。動画連携・通知・製品LP等は未確認、outbox追加・Discord実送信・朝タスク再開は未実施のため、全体のstatusはerrorのまま。比較基準131版を維持。"
+  "evidence": {
+    "previous_record": {
+      "checked_at": "2026-10-21T04:27:05.486Z",
+      "cutoff_jst": "2026-10-21T07:00:00+09:00",
+      "status": "error",
+      "release_ids": [
+        "estlela-v142"
+      ],
+      "evidence": "前回記録（2026-10-21T04:15:50.742Z）: 配信済み比較基準は131版。公開142版は専用ID999999・環境revision6で確認。GitHub Secretとmain限定検証環境は設定済み。本番検証run39542595300はCloudflare JavaScript Detectionsの通信を検証側が遮断してblocked。artifact12319339469と候補の原稿ハッシュ・公開ソースを照合したが、正式な成功レポートではない。自動確認の実行承認待ち。動画連携・通知・製品LP等の未確認変更は未解消。outbox追加・Discord実送信・朝タスク再開は行っていない。\n追加確認（2026-10-21T04:27:05.486Z）: ユーザー承認後、run39543878171がmainの7d29de0014ccb75f96d6f699aedaa5f96ba964dcで成功。artifact12320543142のZIP SHA-256と、元のverification.jsonの公開142版・原稿ハッシュ・5項目すべてtrue・時刻をvalidate_reportで照合した。個別メニューと月次チェックの正式な本番検証は完了。動画連携・通知・製品LP等は未確認、outbox追加・Discord実送信・朝タスク再開は未実施のため、全体のstatusはerrorのまま。比較基準131版を維持。"
+    },
+    "baseline_before": "estlela-v131",
+    "included_public_versions": [
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142
+    ],
+    "verification_run": "https://github.com/77toku/estlela.sns/actions/runs/39546249528",
+    "verification_commit": "9faf2f173cfacd0facfaa64a85706f826a6f6bb9",
+    "artifact_id": 12321399320,
+    "artifact_sha256": "9a1cad655bcbddb7c6a494ebdceec819151af090a1e13b2597aaafca502a4a71",
+    "payload_hash": "64886e7d2c91fb85b33a1ba225d86f8cf8d109b79fd6b399c09946d9c94026c0",
+    "production_checks": "All 9 required checks passed on the exact v142 source. Monthly values restored. Dedicated ID 999999 only.",
+    "manual_video_checks": "999999 browser ID selection and creation dashboard, same-browser history, and legacy authenticated history passed on video public v44 (commit 1db9c2a896a858ae247466077f0c3d6b5e6c384a). No video created or sent.",
+    "rollout_state": "Push notifications remain disabled and marked preparing; not announced. Internal provenance and superseded identity paths are not announced as new capabilities.",
+    "history_reconciliation": "All 18 old outbox, 18 sent and 10 attempts unchanged; zero unresolved attempts before preparing v142.",
+    "delivery_state": "Verified payload and report prepared together; awaiting genuine Discord receipt."
+  }
 }
