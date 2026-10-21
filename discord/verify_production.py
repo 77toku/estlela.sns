@@ -59,6 +59,15 @@ def allowed_request(url, method, headers, member):
         '/estlela-management-192.png', '/estlela-management-512.png'))
 
 
+def hosting_widget_request(url, method, resource_type):
+    """The hosting editor widget is not part of the app and must stay blocked."""
+    parsed = urlsplit(url)
+    return (method == 'GET' and resource_type == 'script' and
+            parsed.scheme == 'https' and parsed.netloc == urlsplit(SITE).netloc and
+            parsed.path == '/_sites/dispatch-assets/sites-widget.js' and
+            not parsed.query and not parsed.fragment)
+
+
 async def run_browser(payload, raw_url):
     from playwright.async_api import async_playwright
     member, token = credentials(raw_url)
@@ -97,6 +106,12 @@ async def run_browser(payload, raw_url):
             blocked = []
             async def guard(route):
                 request = route.request
+                # Sites injects this optional editor/composer loader into the
+                # document. Do not execute it or permit its external traffic.
+                # Its exact, query-free script GET is intentionally aborted.
+                if hosting_widget_request(request.url, request.method, request.resource_type):
+                    await route.abort()
+                    return
                 if allowed_request(request.url, request.method, request.headers, member):
                     await route.continue_()
                 else:
