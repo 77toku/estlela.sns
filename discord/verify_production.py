@@ -50,7 +50,7 @@ def allowed_request(url, method, headers, member):
                 method in ('GET', 'POST') and not query and
                 not {'x-affiliate-id', 'x-activity-token'} & headers.keys() and
                 '..' not in parsed.path.split('/') and
-                re.fullmatch(r'/cdn-cgi/challenge-platform/[A-Za-z0-9_./-]+', parsed.path) is not None)
+                re.fullmatch(r"/cdn-cgi/challenge-platform/[A-Za-z0-9_./:~!$&'()*+,;=@-]+", parsed.path) is not None)
     if parsed.path == '/api/affiliate-activity':
         return method == 'GET' and query == {'ref': [member], 'session': ['mt']}
     if parsed.path == '/api/monthly-tasks':

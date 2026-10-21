@@ -172,6 +172,8 @@ class VerificationTests(unittest.TestCase):
         with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '1'}):
             self.assertTrue(allowed_request(SITE + path, 'GET', {}, '991122'))
             self.assertTrue(allowed_request(SITE + '/cdn-cgi/challenge-platform/h/g/jsd/verification', 'POST', {}, '991122'))
+            # Challenge flow identifiers use ordinary URI path delimiters.
+            self.assertTrue(allowed_request(SITE + '/cdn-cgi/challenge-platform/h/g/flow/ov1/0.25:123:LOCAL/verification', 'POST', {}, '991122'))
             for url, method, headers in (
                 (SITE + path, 'DELETE', {}),
                 (SITE + path + '?ref=22', 'GET', {}),
@@ -181,6 +183,8 @@ class VerificationTests(unittest.TestCase):
                 ('https://example.org' + path, 'GET', {}),
                 (SITE + '/cdn-cgi/trace', 'GET', {}),
                 (SITE + '/cdn-cgi/challenge-platform/../api/private', 'GET', {}),
+                (SITE + '/cdn-cgi/challenge-platform/%2e%2e/api/private', 'GET', {}),
+                (SITE + '/cdn-cgi/challenge-platform/flow\\private', 'GET', {}),
             ):
                 with self.subTest(url=url, method=method):
                     self.assertFalse(allowed_request(url, method, headers, '991122'))
