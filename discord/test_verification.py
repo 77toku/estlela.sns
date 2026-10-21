@@ -10,7 +10,7 @@ from unittest.mock import patch
 import publish_updates as publisher
 from prepare_update import prepare
 from verification import CHECKS, SITE, payload_hash, validate_report
-from verify_production import allowed_request, credentials, hosting_widget_request, VerificationStopped
+from verify_production import allowed_request, blocked_request_code, credentials, hosting_widget_request, VerificationStopped
 
 
 class VerificationTests(unittest.TestCase):
@@ -156,4 +156,12 @@ class VerificationTests(unittest.TestCase):
         ):
             with self.subTest(url=url, method=method, kind=kind):
                 self.assertFalse(hosting_widget_request(url, method, kind))
+
+    def test_blocked_resource_diagnostics_exclude_all_query_values(self):
+        base = SITE + '/_sites/dispatch-assets/sites-widget.js'
+        code = blocked_request_code(base + '?ref=991122&token=' + 'c' * 64, 'script')
+        self.assertEqual(code, blocked_request_code(base + '?ref=22&token=' + 'd' * 64, 'script'))
+        for value in (SITE, '/_sites/', '991122', 'c' * 64, 'token=', 'ref='):
+            self.assertNotIn(value, code)
+        self.assertRegex(code, r'^script:same_origin:hosting:query:[a-f0-9]{16}$')
 
