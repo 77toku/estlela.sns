@@ -1,0 +1,77 @@
+{
+  "checked_at": "2026-10-29T07:01:27+09:00",
+  "cutoff_jst": "2026-10-29T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v142",
+      "source_versions": [
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        140,
+        141,
+        142
+      ],
+      "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+      "source_fingerprint": "19d4503f38c90660eb5c8412a1e0ff2681221bf866534c7b893a571b56cda7db",
+      "sent_content_hash": "64886e7d2c91fb85b33a1ba225d86f8cf8d109b79fd6b399c09946d9c94026c0",
+      "discord_message_id": "1562328098190393397"
+    },
+    "cutoff_review": {
+      "latest_saved_version": 142,
+      "newer_saved_versions_before_cutoff": [],
+      "conclusion": "比較基準v142より後の保存版・公開版なし"
+    },
+    "public_deployment": {
+      "public_version": 142,
+      "deployment_id": "appgdep_6ad8099fb7f08191871c4955e7f0a8f8",
+      "source_commit": "38a859cdb1ceb6aaadfda2ea4a65a57eba97f6b2",
+      "status": "succeeded",
+      "updated_at": "2026-10-21T00:40:56.741880+00:00",
+      "url": "https://estlela-business-support.honotoku.chatgpt.site"
+    },
+    "production_page": {
+      "checked_after_cutoff": true,
+      "url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "title": "エステレラ ビジネスサポート｜登録方法・製品・活動ガイド",
+      "result": "本番トップ画面と9項目のサポートメニューを正常表示"
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 19,
+      "sent_count": 19,
+      "attempt_count": 11,
+      "unresolved_attempts": [],
+      "result": "全attemptに対応するsentがあり、11件すべてcontent_hash一致・DiscordメッセージIDあり"
+    },
+    "previous_day": {
+      "check_date": "2026-10-28",
+      "check_status": "no_update",
+      "publisher_runs": [
+        {
+          "run_id": 40591471563,
+          "event": "push",
+          "conclusion": "success"
+        },
+        {
+          "run_id": 40611808567,
+          "event": "schedule",
+          "conclusion": "success"
+        },
+        {
+          "run_id": 40616871740,
+          "event": "schedule",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "open_failure_issues": 0,
+    "action": "候補・検証証拠・outboxは作成せず、Discord投稿も行わない"
+  }
+}
