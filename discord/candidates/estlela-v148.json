@@ -22,8 +22,12 @@
   "message": "【エステレラ サポート更新】\nANOA アルティマトリートメントの商品LPを追加しました。特徴・全成分・使い方を1ページで確認できます。\n商品紹介メニューから、自分の紹介者IDを保ったリンクを共有できます。初めての方は無料カスタマー登録、登録済みの方は商品ページへ分けて案内します。\nhttps://estlela-business-support.honotoku.chatgpt.site",
   "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
   "source_versions": [
-    143, 144, 145,
-    146, 147, 148
+    143,
+    144,
+    145,
+    146,
+    147,
+    148
   ],
   "verification_target": {
     "source_commit": "b5bb4ba733205fffe71b39d2135b679d7a0919ee",

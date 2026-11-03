@@ -117,7 +117,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False, pro
     if treatment:
         progress['stage'] = 'treatment-share'
         await page.goto(SITE + '/lp-share?' + urlencode({
-            'ref': member, 'product': 'anoa-ultima-treatment', 'coupon': 'TESTONLY'
+            'ref': member, 'product': 'anoa-ultima-treatment'
         }), wait_until='networkidle')
         await page.get_by_role('heading', name='ANOA アルティマトリートメント', level=1).wait_for(state='visible')
         treatment_preview = page.get_by_role('link', name='商品LPを別画面で開く', exact=True)
