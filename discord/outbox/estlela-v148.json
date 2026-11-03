@@ -1,0 +1,50 @@
+{
+  "release_id": "estlela-v148",
+  "date": "2026.11.04",
+  "headline": "アルティマトリートメントLP公開",
+  "changes": [
+    {
+      "type": "新機能",
+      "title": "商品LPを追加",
+      "benefit": "特徴・全成分・使い方を1ページで確認できます。"
+    },
+    {
+      "type": "改善",
+      "title": "紹介リンクを共有",
+      "benefit": "自分の紹介者IDを保った商品ページを案内できます。"
+    },
+    {
+      "type": "改善",
+      "title": "登録・購入導線",
+      "benefit": "初めての方と登録済みの方を分けて案内できます。"
+    }
+  ],
+  "message": "【エステレラ サポート更新】\nANOA アルティマトリートメントの商品LPを追加しました。特徴・全成分・使い方を1ページで確認できます。\n商品紹介メニューから、自分の紹介者IDを保ったリンクを共有できます。初めての方は無料カスタマー登録、登録済みの方は商品ページへ分けて案内します。\nhttps://estlela-business-support.honotoku.chatgpt.site",
+  "site_url": "https://estlela-business-support.honotoku.chatgpt.site",
+  "source_versions": [
+    143,
+    144,
+    145,
+    146,
+    147,
+    148
+  ],
+  "verification_target": {
+    "source_commit": "b5bb4ba733205fffe71b39d2135b679d7a0919ee",
+    "source_fingerprint": "a0d0a382eb5c1f71539a695991a5162aa12e28bab6528331d3744a48d2ca3a47",
+    "deployment_id": "appgdep_6ae9aa3afe0c81918469bcfaaaccb12c",
+    "public_version": 148
+  },
+  "verification_requirements": [
+    "unauthenticated-denied",
+    "individual-menu",
+    "monthly-read",
+    "monthly-write-restore",
+    "source-stable",
+    "public-referral",
+    "cream-lp",
+    "video-id-entry",
+    "notification-not-ready",
+    "treatment-lp"
+  ]
+}
