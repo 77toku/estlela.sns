@@ -68,7 +68,9 @@ def excluded_public_request(url, method, resource_type):
             method == 'GET' and resource_type == 'image')
 
 
-async def verify_public_surfaces(page, api, member, checks, treatment=False):
+async def verify_public_surfaces(page, api, member, checks, treatment=False, progress=None):
+    progress = progress if progress is not None else {}
+    progress['stage'] = 'public-landing'
     await page.goto(SITE + '/', wait_until='networkidle')
     await page.get_by_role('heading', level=1).wait_for(state='visible')
     nav = page.get_by_role('navigation', name='サポートメニュー')
@@ -82,6 +84,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
     video_url = await video.get_attribute('href')
     if not video_url or not allowed_public_request(video_url, 'GET', {}, member):
         raise VerificationStopped('video_entry_link_mismatch')
+    progress['stage'] = 'cream-share'
     await page.get_by_role('link', name=re.compile('商品を紹介する')).click()
     await page.get_by_role('link', name='ANOA アドバンスクリームの紹介メニューを開く', exact=True).click()
     preview = page.get_by_role('link', name='商品LPを別画面で開く', exact=True)
@@ -90,6 +93,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
     if not allowed_public_request(preview_url, 'GET', {}, member):
         raise VerificationStopped('cream_referral_link_mismatch')
     checks['public-referral'] = True
+    progress['stage'] = 'cream-lp'
     await page.goto(preview_url, wait_until='networkidle')
     await page.get_by_role('heading', name='うるおいを守る、 仕上げのひと手間。', level=1).wait_for(state='visible')
     for name, destination, expected in (
@@ -111,6 +115,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
         raise VerificationStopped('cream_image_failed')
     checks['cream-lp'] = True
     if treatment:
+        progress['stage'] = 'treatment-share'
         await page.goto(SITE + '/lp-share?' + urlencode({
             'ref': member, 'product': 'anoa-ultima-treatment', 'coupon': 'TESTONLY'
         }), wait_until='networkidle')
@@ -120,6 +125,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
         treatment_url = urljoin(SITE, await treatment_preview.get_attribute('href'))
         if not allowed_public_request(treatment_url, 'GET', {}, member):
             raise VerificationStopped('treatment_referral_link_mismatch')
+        progress['stage'] = 'treatment-lp'
         await page.goto(treatment_url, wait_until='networkidle')
         await page.get_by_role('heading', name='アノア アルティマトリートメント', level=1).wait_for(state='visible')
         canonical = await page.locator('link[rel="canonical"]').get_attribute('href')
@@ -130,6 +136,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
         treatment_hero = page.get_by_role('img', name=re.compile('つややかな髪の女性と金色のしずく'))
         if not await treatment_hero.evaluate('(image) => image.complete && image.naturalWidth > 0'):
             raise VerificationStopped('treatment_image_failed')
+        progress['stage'] = 'treatment-redirects'
         for selector, destination, expected in (
                 ('#registration-link', 'register', 'https://member.estlela.jp/U' + member),
                 ('#official-product-link', 'shop', 'https://estlela.jp/products/20004?rc=U' + member)):
@@ -143,6 +150,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
             if response.status not in (302, 303, 307, 308) or response.headers.get('location') != expected:
                 raise VerificationStopped('treatment_official_redirect_mismatch')
         checks['treatment-lp'] = True
+    progress['stage'] = 'video-id-entry'
     await page.goto(video_url, wait_until='networkidle')
     await page.get_by_role('heading', name='動画に使うIDを選ぶ', exact=True).wait_for(state='visible')
     own = page.locator('#id-source-support')
@@ -240,6 +248,7 @@ async def run_browser(payload, raw_url):
     extended = profile in (list(EXTENDED_CHECKS), list(TREATMENT_CHECKS))
     treatment = profile == list(TREATMENT_CHECKS)
     checks = {}
+    progress = {'stage': 'browser-start'}
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
         context = await browser.new_context(service_workers='block', viewport={'width': 390, 'height': 844})
@@ -261,6 +270,7 @@ async def run_browser(payload, raw_url):
         restored = False
         try:
             # Reject unapproved accounts before the browser fetches any data.
+            progress['stage'] = 'dedicated-account-preflight'
             await preflight()
             denial = await api.get(SITE + '/api/affiliate-activity?' + urlencode({'ref': member}), max_redirects=0)
             if denial.status != 404:
@@ -301,6 +311,7 @@ async def run_browser(payload, raw_url):
                         type(data.get('archiveDone')) is not bool or type(data.get('passcodeDone')) is not bool):
                     raise VerificationStopped('monthly_state_invalid')
                 return {key: data[key] for key in ('month', 'archiveDone', 'passcodeDone')}
+            progress['stage'] = 'monthly-read'
             original = await state()
             url = SITE + '/affiliate-activity?' + urlencode({'ref': member, 'session': 'mt'}) + '#monthly-tasks'
             await page.goto(url, wait_until='networkidle')
@@ -322,6 +333,7 @@ async def run_browser(payload, raw_url):
                 if not await notification.is_visible() or not await notification.is_disabled():
                     raise VerificationStopped('notification_readiness_mismatch')
                 checks['notification-not-ready'] = True
+            progress['stage'] = 'monthly-write'
             changed = True  # Even an ambiguous write must be restored before success.
             async with page.expect_response(lambda r: urlsplit(r.url).path == '/api/monthly-tasks' and r.request.method == 'PATCH') as pending:
                 # The controlled checkbox updates only after the PATCH completes.
@@ -336,9 +348,13 @@ async def run_browser(payload, raw_url):
             if updated != {**original, 'archiveDone': not original['archiveDone']} or await checkbox.is_checked() == original['archiveDone']:
                 raise VerificationStopped('monthly_persistence_failed')
             if extended:
-                await verify_public_surfaces(page, api, member, checks, treatment)
+                await verify_public_surfaces(page, api, member, checks, treatment, progress)
             if blocked:
                 raise VerificationStopped('unexpected_network_request_blocked:' + ','.join(sorted(set(blocked))))
+        except VerificationStopped:
+            raise
+        except Exception:
+            raise VerificationStopped('browser_stage_failed:' + progress['stage']) from None
         finally:
             try:
                 if changed and original is not None:
