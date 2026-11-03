@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 import publish_updates as publisher
 from prepare_update import prepare
-from verification import CHECKS, EXTENDED_CHECKS, SITE, payload_hash, validate_report
+from verification import CHECKS, EXTENDED_CHECKS, TREATMENT_CHECKS, SITE, payload_hash, validate_report
 from verify_production import VIDEO, allowed_public_request, excluded_public_request, allowed_request, blocked_request_code, credentials, hosting_widget_request, VerificationStopped
 
 
@@ -62,6 +62,16 @@ class VerificationTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validate_report(self.payload, full)
 
+    def test_treatment_release_requires_the_new_live_product_check(self):
+        self.payload['verification_requirements'] = list(TREATMENT_CHECKS)
+        full = {**self.report, 'payload_hash': payload_hash(self.payload),
+                'checks': {key: True for key in TREATMENT_CHECKS}}
+        validate_report(self.payload, full)
+        incomplete = copy.deepcopy(full)
+        del incomplete['checks']['treatment-lp']
+        with self.assertRaises(ValueError):
+            validate_report(self.payload, incomplete)
+
     def test_public_profile_denies_writes_other_ids_secret_headers_and_purchase_navigation(self):
         member = '999999'
         valid = (
@@ -69,6 +79,9 @@ class VerificationTests(unittest.TestCase):
             SITE + '/lp-share?ref=999999&product=anoa-advance-cream&coupon=TESTONLY',
             SITE + '/go/anoa-advance-cream?id=999999&preview=1&coupon=TESTONLY',
             SITE + '/lp/anoa-advance-cream?id=999999&preview=1',
+            SITE + '/lp-share?ref=999999&product=anoa-ultima-treatment&coupon=TESTONLY',
+            SITE + '/go/anoa-ultima-treatment?id=999999&preview=1&coupon=TESTONLY',
+            SITE + '/lp/anoa-ultima-treatment?id=999999&preview=1',
             VIDEO + '/admin?mode=browser&ref=999999&support_ref=999999',
             VIDEO + '/assets/admin.js?v=20261020-id-switch',
         )
@@ -239,4 +252,5 @@ class VerificationTests(unittest.TestCase):
             ):
                 with self.subTest(url=url, method=method):
                     self.assertFalse(allowed_request(url, method, headers, '991122'))
+
 

@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 SITE = 'https://estlela-business-support.honotoku.chatgpt.site'
 CHECKS = ('unauthenticated-denied', 'individual-menu', 'monthly-read', 'monthly-write-restore', 'source-stable')
 EXTENDED_CHECKS = CHECKS + ('public-referral', 'cream-lp', 'video-id-entry', 'notification-not-ready')
+TREATMENT_CHECKS = EXTENDED_CHECKS + ('treatment-lp',)
 
 
 def payload_hash(payload):
@@ -34,7 +35,7 @@ def validate_target(payload):
         raise ValueError('Target must be the latest included public version')
     if payload.get('release_id') != f'estlela-v{latest}':
         raise ValueError('Release ID must match the verified public version')
-    if payload.get('verification_requirements') not in (list(CHECKS), list(EXTENDED_CHECKS)):
+    if payload.get('verification_requirements') not in (list(CHECKS), list(EXTENDED_CHECKS), list(TREATMENT_CHECKS)):
         raise ValueError('Unsupported production verification profile')
     return target
 
@@ -59,4 +60,5 @@ def check_pending_verification(payload, root):
     if not path.exists():
         raise ValueError('Missing production verification: ' + payload['release_id'])
     validate_report(payload, json.loads(path.read_text(encoding='utf-8')))
+
 

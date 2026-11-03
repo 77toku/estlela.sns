@@ -12,7 +12,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlsplit, urljoin
-from verification import SITE, CHECKS, EXTENDED_CHECKS, payload_hash, validate_target
+from verification import SITE, CHECKS, EXTENDED_CHECKS, TREATMENT_CHECKS, payload_hash, validate_target
 from render_update import validate_payload
 
 
@@ -49,9 +49,10 @@ def allowed_public_request(url, method, headers, member):
         return query in ({}, {'ref': [member]})
     if parsed.path == '/lp-share':
         return (query.get('ref') == [member] and not set(query) - {'ref', 'coupon', 'product'} and
-                query.get('product', ['anoa-advance-cream']) == ['anoa-advance-cream'] and
+                query.get('product', ['anoa-advance-cream'])[0] in ('anoa-advance-cream', 'anoa-ultima-treatment') and
                 query.get('coupon', ['TESTONLY']) == ['TESTONLY'])
-    if parsed.path in ('/go/anoa-advance-cream', '/lp/anoa-advance-cream'):
+    if parsed.path in ('/go/anoa-advance-cream', '/lp/anoa-advance-cream',
+                       '/go/anoa-ultima-treatment', '/lp/anoa-ultima-treatment'):
         return (query.get('id') == [member] and query.get('preview') == ['1'] and
                 not set(query) - {'id', 'preview', 'coupon'} and query.get('coupon', ['TESTONLY']) == ['TESTONLY'])
     return not query and parsed.path.startswith(('/lp-assets/', '/images/'))
@@ -67,7 +68,7 @@ def excluded_public_request(url, method, resource_type):
             method == 'GET' and resource_type == 'image')
 
 
-async def verify_public_surfaces(page, api, member, checks):
+async def verify_public_surfaces(page, api, member, checks, treatment=False):
     await page.goto(SITE + '/', wait_until='networkidle')
     await page.get_by_role('heading', level=1).wait_for(state='visible')
     nav = page.get_by_role('navigation', name='サポートメニュー')
@@ -109,6 +110,39 @@ async def verify_public_surfaces(page, api, member, checks):
     if not await hero.evaluate('(image) => image.complete && image.naturalWidth > 0'):
         raise VerificationStopped('cream_image_failed')
     checks['cream-lp'] = True
+    if treatment:
+        await page.goto(SITE + '/lp-share?' + urlencode({
+            'ref': member, 'product': 'anoa-ultima-treatment', 'coupon': 'TESTONLY'
+        }), wait_until='networkidle')
+        await page.get_by_role('heading', name='ANOA アルティマトリートメント', level=1).wait_for(state='visible')
+        treatment_preview = page.get_by_role('link', name='商品LPを別画面で開く', exact=True)
+        await treatment_preview.wait_for(state='visible')
+        treatment_url = urljoin(SITE, await treatment_preview.get_attribute('href'))
+        if not allowed_public_request(treatment_url, 'GET', {}, member):
+            raise VerificationStopped('treatment_referral_link_mismatch')
+        await page.goto(treatment_url, wait_until='networkidle')
+        await page.get_by_role('heading', name='アノア アルティマトリートメント', level=1).wait_for(state='visible')
+        canonical = await page.locator('link[rel="canonical"]').get_attribute('href')
+        if canonical != SITE + '/lp/anoa-ultima-treatment':
+            raise VerificationStopped('treatment_canonical_mismatch')
+        if not await page.get_by_text('洗い流すトリートメント 220g', exact=False).is_visible():
+            raise VerificationStopped('treatment_content_mismatch')
+        treatment_hero = page.get_by_role('img', name=re.compile('つややかな髪の女性と金色のしずく'))
+        if not await treatment_hero.evaluate('(image) => image.complete && image.naturalWidth > 0'):
+            raise VerificationStopped('treatment_image_failed')
+        for selector, destination, expected in (
+                ('#registration-link', 'register', 'https://member.estlela.jp/U' + member),
+                ('#official-product-link', 'shop', 'https://estlela.jp/products/20004?rc=U' + member)):
+            href = await page.locator(selector).get_attribute('href')
+            parsed = urlsplit(urljoin(SITE, href))
+            if (parsed.scheme != 'https' or parsed.netloc != urlsplit(SITE).netloc or
+                    parsed.path != '/official/anoa-ultima-treatment' or
+                    parse_qs(parsed.query) != {'id': [member], 'target': [destination], 'preview': ['1']}):
+                raise VerificationStopped('treatment_official_link_mismatch')
+            response = await api.get(urljoin(SITE, href), max_redirects=0)
+            if response.status not in (302, 303, 307, 308) or response.headers.get('location') != expected:
+                raise VerificationStopped('treatment_official_redirect_mismatch')
+        checks['treatment-lp'] = True
     await page.goto(video_url, wait_until='networkidle')
     await page.get_by_role('heading', name='動画に使うIDを選ぶ', exact=True).wait_for(state='visible')
     own = page.locator('#id-source-support')
@@ -202,7 +236,9 @@ async def run_browser(payload, raw_url):
     from playwright.async_api import async_playwright
     member, token = credentials(raw_url)
     target = validate_target(payload)
-    extended = payload['verification_requirements'] == list(EXTENDED_CHECKS)
+    profile = payload['verification_requirements']
+    extended = profile in (list(EXTENDED_CHECKS), list(TREATMENT_CHECKS))
+    treatment = profile == list(TREATMENT_CHECKS)
     checks = {}
     async with async_playwright() as playwright:
         browser = await playwright.chromium.launch()
@@ -300,7 +336,7 @@ async def run_browser(payload, raw_url):
             if updated != {**original, 'archiveDone': not original['archiveDone']} or await checkbox.is_checked() == original['archiveDone']:
                 raise VerificationStopped('monthly_persistence_failed')
             if extended:
-                await verify_public_surfaces(page, api, member, checks)
+                await verify_public_surfaces(page, api, member, checks, treatment)
             if blocked:
                 raise VerificationStopped('unexpected_network_request_blocked:' + ','.join(sorted(set(blocked))))
         finally:
@@ -352,4 +388,5 @@ def main():
 
 if __name__ == '__main__':
     raise SystemExit(main())
+
 
