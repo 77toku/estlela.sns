@@ -125,7 +125,7 @@ async def verify_public_surfaces(page, api, member, checks, treatment=False):
         canonical = await page.locator('link[rel="canonical"]').get_attribute('href')
         if canonical != SITE + '/lp/anoa-ultima-treatment':
             raise VerificationStopped('treatment_canonical_mismatch')
-        if not await page.get_by_text('洗い流すトリートメント 220g', exact=False).is_visible():
+        if not await page.get_by_text('220g', exact=True).is_visible():
             raise VerificationStopped('treatment_content_mismatch')
         treatment_hero = page.get_by_role('img', name=re.compile('つややかな髪の女性と金色のしずく'))
         if not await treatment_hero.evaluate('(image) => image.complete && image.naturalWidth > 0'):
