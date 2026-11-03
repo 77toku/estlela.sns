@@ -55,6 +55,10 @@ def allowed_public_request(url, method, headers, member):
                        '/go/anoa-ultima-treatment', '/lp/anoa-ultima-treatment'):
         return (query.get('id') == [member] and query.get('preview') == ['1'] and
                 not set(query) - {'id', 'preview', 'coupon'} and query.get('coupon', ['TESTONLY']) == ['TESTONLY'])
+    if parsed.path == '/lp-assets/anoa-ultima-treatment/app.js':
+        return query == {'v': ['single-coupon-20261103']}
+    if parsed.path == '/lp-assets/anoa-ultima-treatment/style.css':
+        return query == {'v': ['watercolor-20261103']}
     return not query and parsed.path.startswith(('/lp-assets/', '/images/'))
 
 
@@ -197,8 +201,12 @@ def allowed_request(url, method, headers, member):
     if parsed.path.startswith('/cdn-cgi/challenge-platform/'):
         # Run the site's normal Cloudflare browser check only after an explicit
         # per-run opt-in. Do not forward application credentials in this path.
+        jsd_query = (not query or
+                     parsed.path == '/cdn-cgi/challenge-platform/scripts/jsd/main.js' and
+                     set(query) == {'ray'} and len(query['ray']) == 1 and
+                     re.fullmatch(r'[a-f0-9]{16,32}', query['ray'][0]) is not None)
         return (os.environ.get('ESTLELA_ALLOW_CLOUDFLARE_JSD') == '1' and
-                method in ('GET', 'POST') and not query and
+                method in ('GET', 'POST') and jsd_query and
                 not {'x-affiliate-id', 'x-activity-token'} & headers.keys() and
                 '..' not in parsed.path.split('/') and
                 re.fullmatch(r"/cdn-cgi/challenge-platform/[A-Za-z0-9_./:~!$&'()*+,;=@-]+", parsed.path) is not None)

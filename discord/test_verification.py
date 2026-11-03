@@ -82,6 +82,8 @@ class VerificationTests(unittest.TestCase):
             SITE + '/lp-share?ref=999999&product=anoa-ultima-treatment&coupon=TESTONLY',
             SITE + '/go/anoa-ultima-treatment?id=999999&preview=1&coupon=TESTONLY',
             SITE + '/lp/anoa-ultima-treatment?id=999999&preview=1',
+            SITE + '/lp-assets/anoa-ultima-treatment/app.js?v=single-coupon-20261103',
+            SITE + '/lp-assets/anoa-ultima-treatment/style.css?v=watercolor-20261103',
             VIDEO + '/admin?mode=browser&ref=999999&support_ref=999999',
             VIDEO + '/assets/admin.js?v=20261020-id-switch',
         )
@@ -235,6 +237,7 @@ class VerificationTests(unittest.TestCase):
             self.assertFalse(allowed_request(SITE + path, 'GET', {}, '991122'))
         with patch.dict(os.environ, {'ESTLELA_ALLOW_CLOUDFLARE_JSD': '1'}):
             self.assertTrue(allowed_request(SITE + path, 'GET', {}, '991122'))
+            self.assertTrue(allowed_request(SITE + path + '?ray=0123456789abcdef', 'GET', {}, '991122'))
             self.assertTrue(allowed_request(SITE + '/cdn-cgi/challenge-platform/h/g/jsd/verification', 'POST', {}, '991122'))
             # Challenge flow identifiers use ordinary URI path delimiters.
             self.assertTrue(allowed_request(SITE + '/cdn-cgi/challenge-platform/h/g/flow/ov1/0.25:123:LOCAL/verification', 'POST', {}, '991122'))
