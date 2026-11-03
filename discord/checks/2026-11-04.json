@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-11-04T07:25:27+09:00",
+  "cutoff_jst": "2026-11-04T07:00:00+09:00",
+  "status": "delivered",
+  "release_ids": [
+    "estlela-v148"
+  ],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v142",
+      "public_version": 142,
+      "sent_content_hash": "64886e7d2c91fb85b33a1ba225d86f8cf8d109b79fd6b399c09946d9c94026c0"
+    },
+    "public_update": {
+      "source_versions": [143, 144, 145, 146, 147, 148],
+      "public_version": 148,
+      "deployment_id": "appgdep_6ae9aa3afe0c81918469bcfaaaccb12c",
+      "source_commit": "b5bb4ba733205fffe71b39d2135b679d7a0919ee",
+      "source_fingerprint": "a0d0a382eb5c1f71539a695991a5162aa12e28bab6528331d3744a48d2ca3a47",
+      "deployment_status": "succeeded",
+      "deployment_updated_at": "2026-11-03T09:32:51.163087+00:00",
+      "result": "v143〜v148の成功deploymentと本番画面を照合し、ANOA アルティマトリートメントLP・紹介リンク・登録/商品導線を確認"
+    },
+    "production_verification": {
+      "run_id": 41730089257,
+      "run_commit": "131e5d831831293c41f5841ffccdac008eba377f",
+      "artifact_id": 13274549750,
+      "artifact_digest": "sha256:af35fc96a4fa115ef1127a15fade3c5ba994854aa8bb2a7af346c7e1cd52b2de",
+      "payload_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "checked_at": "2026-11-03T22:22:36.234057+00:00",
+      "checks_passed": 10,
+      "dedicated_id": "999999"
+    },
+    "delivery": {
+      "queue_commit": "6382a094bcd677a18a594d96fc37f5990f3d830a",
+      "publisher_run_id": 41730468762,
+      "publisher_conclusion": "success",
+      "sent_record_commit": "af471d787d7fabd716a5d9ecd3d0d561a59c4b4a",
+      "content_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "discord_message_id": "1567303465577742377",
+      "sent_at": "2026-11-03T22:24:26.991171+00:00"
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 20,
+      "sent_count": 20,
+      "attempt_count": 12,
+      "unresolved_attempts": [],
+      "result": "全attemptに対応するsentがあり、今回のrelease_id・content_hash・DiscordメッセージIDも一致"
+    }
+  }
+}
