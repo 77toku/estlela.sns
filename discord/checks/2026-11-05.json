@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-11-05T07:00:30+09:00",
+  "cutoff_jst": "2026-11-05T07:00:00+09:00",
+  "status": "no_update",
+  "release_ids": [],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v148",
+      "public_version": 148,
+      "source_versions": [143, 144, 145, 146, 147, 148],
+      "sent_content_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "discord_message_id": "1567303465577742377"
+    },
+    "public_state": {
+      "latest_saved_version": 148,
+      "latest_public_version": 148,
+      "deployment_id": "appgdep_6ae9aa3afe0c81918469bcfaaaccb12c",
+      "source_commit": "b5bb4ba733205fffe71b39d2135b679d7a0919ee",
+      "source_fingerprint": "a0d0a382eb5c1f71539a695991a5162aa12e28bab6528331d3744a48d2ca3a47",
+      "deployment_status": "succeeded",
+      "deployment_updated_at": "2026-11-03T09:32:51.163087+00:00",
+      "production_url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "production_screen": "トップページのタイトル、案内文、9件のサポートメニューと各導線を締切後に再確認"
+    },
+    "previous_day_health": {
+      "check_path": "discord/checks/2026-11-04.json",
+      "check_status": "delivered",
+      "publisher_run_id": 41730822789,
+      "publisher_event": "push",
+      "publisher_conclusion": "success",
+      "publisher_head_sha": "74456b2ca4aa534489511f3ce954cbb44d21aa2a",
+      "open_failure_issues": []
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 20,
+      "sent_count": 20,
+      "attempt_count": 12,
+      "unresolved_attempts": [],
+      "queue_check": "Validated queue: 0 pending"
+    },
+    "result": "比較基準v148より新しい保存版・成功deployment・未告知の公開変更は締切時点で存在しない。候補、outbox、verification、Discord投稿は作成していない。"
+  }
+}
