@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-11-19T07:02:34+09:00",
+  "cutoff_jst": "2026-11-19T07:00:00+09:00",
+  "status": "error",
+  "release_ids": ["estlela-v149"],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v148",
+      "public_version": 148,
+      "source_versions": [143, 144, 145, 146, 147, 148],
+      "sent_content_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "discord_message_id": "1567303465577742377"
+    },
+    "public_state": {
+      "latest_saved_version": 149,
+      "latest_public_version": 149,
+      "deployment_id": "appgdep_6afdba17c8c48191b9e40e6610c047ef",
+      "source_commit": "39d2102ef11677e86c6313428f0dc44945f5a920",
+      "source_fingerprint": "81134f55816e6335f51efaa2a41a317a84c9e3de3aca371054c098f2d8f88cd9",
+      "deployment_status": "succeeded",
+      "deployment_updated_at": "2026-11-18T14:45:58.674300+00:00",
+      "production_url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "production_screen": "商品LP共有画面でインナーケアプログラムの見出し、説明、画像、紹介者未確認時の共有ボタン無効状態を確認"
+    },
+    "target_changes": [
+      {
+        "release_id": "estlela-v149",
+        "source_versions": [149],
+        "type": "新機能",
+        "title": "インナーケアLP",
+        "summary": "4製品の違い、選び方、相談先を案内するインナーケアプログラムLPと共有導線を追加",
+        "published_at": "2026-11-18T23:45:58.674300+09:00"
+      }
+    ],
+    "verification_gate": {
+      "status": "blocked",
+      "reason": "現行mainのverification_requirementsは最大10項目で、インナーケアLPの表示、紹介ID保持、preview=1、内部登録・製品確認リダイレクトを確認する項目を持たない。未対応の新機能は検証実装・実行まで告知しない契約のため停止。",
+      "required_action": "mainの検証契約へインナーケアLP専用チェックを追加し、専用ID999999とpreview=1で真正の成功artifactを取得する"
+    },
+    "previous_day_health": {
+      "check_path": "discord/checks/2026-11-18.json",
+      "check_status": "no_update",
+      "publisher_run_id": 44186244053,
+      "publisher_event": "push",
+      "publisher_conclusion": "success",
+      "publisher_head_sha": "b1f4295d82e65f8487ba8bf2c8da76e20ed5b17b",
+      "recovery_runs": [
+        {
+          "run_id": 44229334554,
+          "event": "schedule",
+          "conclusion": "success"
+        },
+        {
+          "run_id": 44233481630,
+          "event": "schedule",
+          "conclusion": "success"
+        }
+      ],
+      "open_failure_issues": []
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 20,
+      "sent_count": 20,
+      "attempt_count": 12,
+      "unresolved_attempts": [],
+      "queue_check": "Validated queue: 0 pending"
+    },
+    "result": "公開149版のインナーケアプログラム追加を確認したが、対応する自動本番検証が未実装のため配信を停止。比較基準はv148を維持し、候補、outbox、verification、Discord投稿は作成していない。"
+  }
+}
