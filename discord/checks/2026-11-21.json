@@ -1,0 +1,98 @@
+{
+  "checked_at": "2026-11-21T07:06:58+09:00",
+  "cutoff_jst": "2026-11-21T07:00:00+09:00",
+  "status": "error",
+  "release_ids": ["estlela-v149"],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v148",
+      "public_version": 148,
+      "source_versions": [143, 144, 145, 146, 147, 148],
+      "sent_content_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "discord_message_id": "1567303465577742377"
+    },
+    "public_state": {
+      "latest_saved_version": 149,
+      "latest_public_version": 149,
+      "deployment_id": "appgdep_6afdba17c8c48191b9e40e6610c047ef",
+      "source_commit": "39d2102ef11677e86c6313428f0dc44945f5a920",
+      "source_fingerprint": "81134f55816e6335f51efaa2a41a317a84c9e3de3aca371054c098f2d8f88cd9",
+      "deployment_status": "succeeded",
+      "deployment_updated_at": "2026-11-18T14:45:58.674300+00:00",
+      "production_url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "production_screen": "商品LP共有画面でインナーケアプログラムの見出し、90日を目安にした説明、4製品案内、紹介者未確認時の共有ボタン無効状態を再確認"
+    },
+    "cutoff_review": {
+      "previous_cutoff_jst": "2026-11-20T07:00:00+09:00",
+      "current_cutoff_jst": "2026-11-21T07:00:00+09:00",
+      "new_saved_versions": [],
+      "new_successful_deployments": [],
+      "carried_forward_release_ids": ["estlela-v149"]
+    },
+    "carried_forward_public_changes": [
+      {
+        "release_id": "estlela-v149",
+        "source_versions": [149],
+        "type": "新機能",
+        "title": "インナーケアLP",
+        "summary": "4製品の違い、選び方、相談先を案内するインナーケアプログラムLPと共有導線を追加",
+        "published_at": "2026-11-18T23:45:58.674300+09:00"
+      }
+    ],
+    "verification_gate": {
+      "status": "blocked",
+      "reason": "mainは前日から未更新で、verification_requirementsは最大10項目のまま。インナーケアLPの表示、紹介ID保持、preview=1、内部登録・製品確認リダイレクトを確認する項目がなく、専用ID999999による真正の成功artifactを取得できない。",
+      "required_action": "mainの検証契約へインナーケアLP専用チェックを追加し、専用ID999999とpreview=1で本番検証を成功させる"
+    },
+    "previous_day_health": {
+      "check_path": "discord/checks/2026-11-20.json",
+      "check_status": "error",
+      "publisher_runs": [
+        {
+          "run_id": 44625581899,
+          "event": "push",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        },
+        {
+          "run_id": 44663350570,
+          "event": "schedule",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        },
+        {
+          "run_id": 44669714006,
+          "event": "schedule",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        }
+      ],
+      "open_failure_issues": [
+        {
+          "number": 10,
+          "title": "[ESTLELA] Daily update needs attention",
+          "state": "open"
+        }
+      ]
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 20,
+      "sent_count": 20,
+      "attempt_count": 12,
+      "unresolved_attempts": [],
+      "unsent_outbox": [],
+      "queue_check": "Validated queue: 0 pending",
+      "v149_paths": {
+        "candidate": false,
+        "outbox": false,
+        "verification": false,
+        "attempt": false,
+        "sent": false
+      },
+      "candidate_created": false,
+      "outbox_created": false,
+      "discord_posted": false
+    },
+    "result": "149版より新しい保存版・成功deploymentは締切時点で存在しないが、未検証の公開149版を飛ばせないためerrorを継続。比較基準はv148を維持し、候補、outbox、verification、Discord本文・画像・投稿は作成していない。"
+  }
+}
