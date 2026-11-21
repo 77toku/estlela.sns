@@ -1,0 +1,112 @@
+{
+  "checked_at": "2026-11-22T07:07:13+09:00",
+  "cutoff_jst": "2026-11-22T07:00:00+09:00",
+  "status": "error",
+  "release_ids": ["estlela-v150"],
+  "evidence": {
+    "comparison_baseline": {
+      "release_id": "estlela-v148",
+      "public_version": 148,
+      "source_versions": [143, 144, 145, 146, 147, 148],
+      "sent_content_hash": "0a7d96d54eb4b49c63515b0fb644a3d0196458f9306fa6c14941fd2defe44a1c",
+      "discord_message_id": "1567303465577742377"
+    },
+    "public_state": {
+      "latest_saved_version": 150,
+      "latest_public_version": 150,
+      "deployment_id": "appgdep_6b018aee120c8191a0d3f8e750c5c619",
+      "source_commit": "916e14fa00e61eaa072f9a1191b9f236cf365766",
+      "source_fingerprint": "10125eddda3d2e886933c76a9348e09dd4b57047e76220b0f793a269435699b4",
+      "deployment_status": "succeeded",
+      "deployment_updated_at": "2026-11-21T12:13:46.834731+00:00",
+      "production_url": "https://estlela-business-support.honotoku.chatgpt.site/",
+      "production_screen": "preview=1のインナーケアプログラムLPで、90日を目安にした説明、4製品の名称、腸内ケア製品ガイド画像、登録・相談案内を再確認"
+    },
+    "cutoff_review": {
+      "previous_cutoff_jst": "2026-11-21T07:00:00+09:00",
+      "current_cutoff_jst": "2026-11-22T07:00:00+09:00",
+      "new_saved_versions": [150],
+      "new_successful_deployments": ["appgdep_6b018aee120c8191a0d3f8e750c5c619"],
+      "new_publication_at": "2026-11-21T21:13:46.834731+09:00",
+      "carried_forward_release_ids": ["estlela-v149"]
+    },
+    "unannounced_public_changes": [
+      {
+        "source_versions": [149],
+        "type": "新機能",
+        "title": "インナーケアLP",
+        "summary": "4製品の違い、選び方、相談先を案内するインナーケアプログラムLPと共有導線を追加",
+        "published_at": "2026-11-18T23:45:58.674300+09:00"
+      },
+      {
+        "source_versions": [150],
+        "type": "改善",
+        "title": "製品ガイド画像",
+        "summary": "インナーケアLPの製品説明部分に、4製品の比較と使い分けをまとめたガイド画像を追加",
+        "published_at": "2026-11-21T21:13:46.834731+09:00"
+      }
+    ],
+    "verification_gate": {
+      "status": "blocked",
+      "reason": "mainのverification_requirementsは最大10項目のままで、インナーケアLPの表示、紹介ID保持、preview=1、内部登録・製品確認リダイレクト、150版の製品ガイド画像を確認する項目がない。専用ID999999による原稿全体と公開150版に一致する真正の成功artifactを取得できない。",
+      "required_action": "mainの検証契約へインナーケアLP専用チェックを追加し、専用ID999999とpreview=1で公開150版の本番検証を成功させる"
+    },
+    "previous_day_health": {
+      "check_path": "discord/checks/2026-11-21.json",
+      "check_status": "error",
+      "publisher_runs": [
+        {
+          "run_id": 44826328707,
+          "event": "push",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        },
+        {
+          "run_id": 44858590051,
+          "event": "schedule",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        },
+        {
+          "run_id": 44861442026,
+          "event": "schedule",
+          "conclusion": "failure",
+          "failure_step": "Check morning generator result"
+        }
+      ],
+      "open_failure_issues": [
+        {
+          "number": 10,
+          "title": "[ESTLELA] Daily update needs attention",
+          "state": "open"
+        }
+      ]
+    },
+    "delivery_reconciliation": {
+      "outbox_count": 20,
+      "sent_count": 20,
+      "attempt_count": 12,
+      "unresolved_attempts": [],
+      "unsent_outbox": [],
+      "queue_check": "Validated queue: 0 pending",
+      "v149_paths": {
+        "candidate": false,
+        "outbox": false,
+        "verification": false,
+        "attempt": false,
+        "sent": false
+      },
+      "v150_paths": {
+        "candidate": false,
+        "outbox": false,
+        "verification": false,
+        "attempt": false,
+        "sent": false
+      },
+      "candidate_created": false,
+      "outbox_created": false,
+      "discord_posted": false
+    },
+    "result": "公開149版と150版の未告知変更を確認したが、インナーケア専用の自動本番検証が未実装で未検証変更を飛ばせないためerror。比較基準はv148を維持し、候補、outbox、verification、Discord本文・画像・投稿は作成していない。"
+  }
+}
